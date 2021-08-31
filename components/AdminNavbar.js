@@ -10,7 +10,7 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
     const location = useRouter().pathname;
 
     return (
-        <nav className="bg-light-blue-500 md:ml-64 py-6 px-3">
+        <nav className="bg-gray-800 md:ml-64 py-6 px-3">
             <div className="container max-w-full mx-auto flex items-center justify-between md:pr-8 md:pl-10">
                 <div className="md:hidden">
                     <Button
@@ -43,12 +43,12 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                     </div>
                 </div>
 
-                <div className="flex justify-between items-center w-full">
-                    <h4 className="uppercase text-white text-sm tracking-wider mt-1">
+                <div className="flex justify-end items-center w-full">
+                    {/* <h4 className="uppercase text-white text-sm tracking-wider mt-1">
                         {location === '/'
                             ? 'DASHBOARD'
                             : location.toUpperCase().replace('/', '')}
-                    </h4>
+                    </h4> */}
 
                     <div className="flex">
                         <NavbarInput placeholder="Search" />

@@ -1,29 +1,30 @@
+import 'tailwindcss/tailwind.css'
+import "@material-tailwind/react/tailwind.css";
 import Head from 'next/head'
-
 import StatusCard from '../components/StatusCard';
-// import ChartLine from '../components/ChartLine';
-// import ChartBar from '../components/ChartBar';
+import ChartLine from '../components/CharLine';
+import ChartBar from '../components/ChartBar';
 import PageVisitsCard from '../components/PageVisitsCard';
 import TrafficCard from '../components/TrafficCard';
 
 
-export default function Home() {
+export default function Home({markets}) {
   return (
     <div>
       <Head>
-        <title>Next-Tailwind</title>
+        <title>Next-Tailwind | Crypto Coins</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <div className="bg-light-blue-500 px-3 md:px-8 h-10" />
+        <div className="bg-gray-800 px-3 md:px-8 h-40" />
         <div className="px-3 md:px-8 -mt-24">
           <div className="container mx-auto max-w-full">
             <div className="grid grid-cols-1 xl:grid-cols-5">
               <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14">
-                {/* <ChartLine /> */}
+                <ChartLine />
               </div>
               <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">
-                {/* <ChartBar /> */}
+                <ChartBar />
               </div>
             </div>
           </div>
@@ -78,13 +79,13 @@ export default function Home() {
 
         <div className="px-3 md:px-8 h-auto">
           <div className="container mx-auto max-w-full">
-            <div className="grid grid-cols-1 xl:grid-cols-5">
+            <div className="grid grid-cols-1 xl:grid-cols-1">
               <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14">
-                <PageVisitsCard />
+                <PageVisitsCard markets={markets} />
               </div>
-              <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">
+              {/* <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">
                 <TrafficCard />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -92,4 +93,19 @@ export default function Home() {
 
     </div>
   )
+}
+
+export async function getServerSideProps() {
+  const res = await fetch(`http://localhost:3000/api/coins/markets`)
+  const data = await res.json()
+
+  if (!data) {
+    return {
+      props: {}
+    }
+  }
+
+  return {
+    props: { markets: data }, // will be passed to the page component as props
+  }
 }

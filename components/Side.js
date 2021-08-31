@@ -13,9 +13,9 @@ export default function Sidebar() {
                 setShowSidebar={setShowSidebar}
             />
             <div
-                className={`h-screen fixed top-0 md:left-0 ${showSidebar} overflow-y-auto flex-row flex-nowrap overflow-hidden shadow-xl bg-white w-64 z-10 py-4 px-6 transition-all duration-300`}
+                className={`h-screen fixed top-0 md:left-0 ${showSidebar}  overflow-y-auto flex-row flex-nowrap overflow-hidden shadow-xl bg-gray-800  w-64 z-10 py-4 px-6 transition-all duration-300`}
             >
-                <div className="flex-col items-stretch min-h-full flex-nowrap px-0 relative">
+                <div className="flex-col  items-stretch min-h-full flex-nowrap px-0 relative">
                     <Link href='/'>
                         <a
                             href="/"
@@ -23,7 +23,7 @@ export default function Sidebar() {
                             rel="noreferrer"
                             className="mt-2 text-center w-full inline-block"
                         >
-                            <H6 color="gray">Material Tailwind</H6>
+                            <H6 color="white">Material Tailwind</H6>
                         </a>
                     </Link>
                     <div className="flex flex-col">
@@ -33,8 +33,7 @@ export default function Sidebar() {
                             <li className="rounded-lg mb-4">
                                 <Link href='/'>
                                     <a
-                                        className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                                        activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                                        className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
                                     >
                                         <Icon name="dashboard" size="2xl" />
                                         Dashboard
@@ -44,9 +43,7 @@ export default function Sidebar() {
                             <li className="rounded-lg mb-2">
                                 <Link href='/settings'>
                                     <a
-                                        to="/settings"
-                                        className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                                        activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                                        className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
                                     >
                                         <Icon name="settings" size="2xl" />
                                         Settings
@@ -56,28 +53,24 @@ export default function Sidebar() {
                             <li className="rounded-lg mb-2 ">
                                 <Link href='/tables'>
                                     <a
-                                        to="/tables"
-                                        className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                                        activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                                        className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
                                     >
                                         <Icon name="toc" size="2xl" />
                                         Tables
                                     </a>
                                 </Link>
                             </li>
-                            <li className="rounded-lg mb-2 text-gray-700">
+                            <li className="rounded-lg mb-2 text-white">
                                 <Link href='/map'>
                                     <a
-                                        to="/maps"
-                                        className="flex items-center gap-4 text-sm text-gray-700 font-light px-4 py-3 rounded-lg"
-                                        activeClassName="bg-gradient-to-tr from-light-blue-500 to-light-blue-700 text-white shadow-md"
+                                        className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
                                     >
                                         <Icon name="map" size="2xl" />
                                         Maps
                                     </a>
                                 </Link>
                             </li>
-                            {/* <li className="px-4 rounded-lg mb-2 text-gray-700">
+                            {/* <li className="px-4 rounded-lg mb-2 text-white">
                                 <Link href="/">
                                     <a
                                         href=""
@@ -90,7 +83,7 @@ export default function Sidebar() {
                                     </a>
                                 </Link>
                             </li>
-                            <li className="px-4 rounded-lg mb-2 text-gray-700">
+                            <li className="px-4 rounded-lg mb-2 text-white">
                                 <Link href="">
                                     <a
                                         href=""
@@ -103,7 +96,7 @@ export default function Sidebar() {
                                     </a>
                                 </Link>
                             </li>
-                            <li className="px-4 rounded-lg mb-2 text-gray-700">
+                            <li className="px-4 rounded-lg mb-2 text-white">
                                 <a
                                     href=""
                                     target="_blank"
@@ -114,8 +107,8 @@ export default function Sidebar() {
                                     Landing Page
                                 </a>
                             </li> */}
-                            <li className="px-4 rounded-lg mb-2 text-gray-700">
-                                <Link href='profile'>
+                            <li className="px-4 rounded-lg mb-2 text-white">
+                                <Link href='/profile'>
                                     <a
                                         rel="noreferrer"
                                         className="flex items-center gap-4 text-sm font-light py-3"

@@ -96,7 +96,7 @@ export default function Home({markets}) {
 }
 
 export async function getServerSideProps() {
-  const res = await fetch(`http://localhost:3000/api/coins/markets`)
+  const res = await fetch(`https://crypto-coins-virid.vercel.app/api/coins/markets`)
   const data = await res.json()
 
   if (!data) {

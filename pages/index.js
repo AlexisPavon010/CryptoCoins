@@ -4,8 +4,10 @@ import ChartLine from '../components/CharLine';
 import ChartBar from '../components/ChartBar';
 import PageVisitsCard from '../components/PageVisitsCard';
 import TrafficCard from '../components/TrafficCard';
+import { db } from '../firebase/client';
+import { getSession } from 'next-auth/client'
 
-export default function Home({markets}) {
+export default function Home({markets, backend}) {
 
   return (
     <div>
@@ -93,9 +95,11 @@ export default function Home({markets}) {
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(ctx) {
   const res = await fetch(`https://crypto-coins-virid.vercel.app/api/coins/markets`)
   const data = await res.json()
+
+
 
   if (!data) {
     return {

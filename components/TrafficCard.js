@@ -11,16 +11,21 @@ export default function TrafficCard() {
     const [user, setUser] = useState(undefined)
     const [backend, setBacken] = useState(null)
 
-    useEffect(() => {
-        app.auth().onAuthStateChanged(user => setUser(user)),
+    const getData = async () => {
+        const rst = await db.collection('user').doc(user?.uid).get()
+        const rest = rst.data()
+        // const rest = data.map(d => d.data())
+        setBacken(rest)
+    }
 
-            db.collection('user').doc(user?.uid).get().then(doc => {
-                const res = doc.data()
-                // const docID = res.map(doc => doc.id)
-                setBacken(res)
-                console.log(res)
-            })
-    }, [])
+
+    useEffect(async () => {
+        app.auth().onAuthStateChanged(user => setUser(user))
+        if (backend == null) {
+            getData()
+        }
+
+    }, [user])
 
     return (
         <Card>
@@ -57,7 +62,7 @@ export default function TrafficCard() {
                                     {backend?.email}
                                 </th>
                                 <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                                {backend?.uid}
+                                    {backend?.uid}
                                 </td>
                                 <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                                     <Progress color="blue" value="60" />

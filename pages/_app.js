@@ -7,17 +7,16 @@ import { useEffect, useState } from 'react';
 function MyApp({ Component, pageProps }) {
 
   const [user, setUser] = useState(null)
+ 
 
 
   useEffect(() => {
+    setUser(undefined)
     app.auth().onAuthStateChanged(user => setUser(user))
   }, [])
 
-  if(!user) {
-    return (
-      <Login />
-    )
-  }
+ if( user === undefined ) return <></>
+  else if (!user) return <Login/>
 
 
   return (

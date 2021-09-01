@@ -19,16 +19,4 @@ const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
 const db = firebase.firestore();
 
-export const onAuthStateChange = (user)=> {
-    return app.auth().onAuthStateChange(user)
-}
-
-export const sigInWitProvider = (provider)=> {
-    return app.auth().signInWithPopup(provider)
-}
-
-export const loginWitEmailAndPassword = (email, password)=> {
-    return app.auth().signInWithEmailAndPassword(email, password)
-}
-
 export {app, db,  googleAuthProvider, facebookAuthProvider };

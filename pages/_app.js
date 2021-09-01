@@ -9,12 +9,11 @@ import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }) {
 
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(undefined)
  
 
 
   useEffect(() => {
-    setUser(undefined)
     app.auth().onAuthStateChanged(user => setUser(user))
   }, [])
 

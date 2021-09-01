@@ -5,9 +5,14 @@ import Image from '@material-tailwind/react/Image';
 import Dropdown from '@material-tailwind/react/Dropdown';
 import DropdownItem from '@material-tailwind/react/DropdownItem';
 import { useRouter } from 'next/dist/client/router';
+import { app } from '../firebase/client';
 
 export default function AdminNavbar({ showSidebar, setShowSidebar }) {
-    const location = useRouter().pathname;
+
+    const cerrarSesion = ()=> {
+        console.log('salir')
+        app.auth().signOut()
+    }
 
     return (
         <nav className="bg-gray-800 md:ml-64 py-6 px-3">
@@ -74,8 +79,8 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                                 <DropdownItem color="lightBlue">
                                     Another Action
                                 </DropdownItem>
-                                <DropdownItem color="lightBlue">
-                                    Something Else
+                                <DropdownItem onClick={()=> cerrarSesion()} color="lightBlue">
+                                    Cerrar Sesion
                                 </DropdownItem>
                             </Dropdown>
                         </div>

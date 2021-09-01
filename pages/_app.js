@@ -1,7 +1,25 @@
 import Head from 'next/head';
 import Side from '../components/Side'
+import Login from '../components/Login';
+import { app } from '../firebase/client';
+import { useEffect, useState } from 'react';
 
 function MyApp({ Component, pageProps }) {
+
+  const [user, setUser] = useState(null)
+
+
+  useEffect(() => {
+    app.auth().onAuthStateChanged(user => setUser(user))
+  }, [])
+
+  if(!user) {
+    return (
+      <Login />
+    )
+  }
+
+
   return (
     <>
       <Head>

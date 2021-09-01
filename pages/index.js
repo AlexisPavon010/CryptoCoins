@@ -13,7 +13,7 @@ export default function Home({markets}) {
         <title>Next-Tailwind | Crypto Coins</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* <>
+      <>
         <div className="bg-gray-800 px-3 md:px-8 h-40" />
         <div className="px-3 md:px-8 -mt-24">
           <div className="container mx-auto max-w-full">
@@ -81,13 +81,13 @@ export default function Home({markets}) {
               <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14">
                 <PageVisitsCard markets={markets} />
               </div>
-              {/* <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">
+              <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">
                 <TrafficCard />
               </div>
             </div>
           </div>
         </div>
-      </> */}
+      </>
 
     </div>
   )

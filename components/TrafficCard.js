@@ -3,8 +3,25 @@ import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
 import Button from '@material-tailwind/react/Button';
 import Progress from '@material-tailwind/react/Progress';
+import { app, db } from '../firebase/client';
+import { useEffect, useState } from 'react';
 
 export default function TrafficCard() {
+
+    const [user, setUser] = useState(undefined)
+    const [backend, setBacken] = useState(null)
+
+    useEffect(() => {
+        app.auth().onAuthStateChanged(user => setUser(user)),
+
+            db.collection('user').doc(user?.uid).get().then(doc => {
+                const res = doc.data()
+                // const docID = res.map(doc => doc.id)
+                setBacken(res)
+                console.log(res)
+            })
+    }, [])
+
     return (
         <Card>
             <CardHeader color="purple" contentPosition="none">
@@ -37,10 +54,10 @@ export default function TrafficCard() {
                         <tbody>
                             <tr>
                                 <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                                    Facebook
+                                    {backend?.email}
                                 </th>
                                 <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                                    1,480
+                                {backend?.uid}
                                 </td>
                                 <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                                     <Progress color="blue" value="60" />

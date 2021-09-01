@@ -1,5 +1,3 @@
-import 'tailwindcss/tailwind.css'
-import "@material-tailwind/react/tailwind.css";
 import Head from 'next/head'
 import StatusCard from '../components/StatusCard';
 import ChartLine from '../components/CharLine';

@@ -16,6 +16,7 @@ export default function TrafficCard() {
         const rest = rst.data()
         // const rest = data.map(d => d.data())
         setBacken(rest)
+        //console.log(rest)
     }
 
 

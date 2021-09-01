@@ -13,7 +13,7 @@ export default function CoinsMarkets({ markets }) {
         setMarkets(markets)
     }, [markets])
 
-    console.log(state)
+    //console.log(state)
     return (
         <Card>
             <CardHeader color="blue" contentPosition="none">

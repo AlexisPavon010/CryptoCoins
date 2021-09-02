@@ -18,7 +18,7 @@ export default function Sidebar() {
             >
                 <div className="flex-col  items-stretch min-h-full flex-nowrap px-0 relative">
                     <div className='mt-2 text-center w-full inline-block'>
-                        <H6 color="white">Cryto Panel</H6>
+                        <H6 color="white">Crypto Panel</H6>
                     </div>
                     <div className="flex flex-col">
                         <hr className="my-4 min-w-full" />

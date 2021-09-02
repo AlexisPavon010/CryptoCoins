@@ -18,7 +18,7 @@ export default function ProfileCard() {
         <Card>
             <div className="flex flex-wrap justify-center">
                 <div className="w-48 px-4 -mt-24">
-                    <Image src={user?.user?.photoURL ? user?.user?.photoURL :'"https://bridgemotorsbucket.s3.amazonaws.com/static/images/Home/user_men.png'} rounded raised />
+                    <Image src={user?.user?.photoURL ? user?.user?.photoURL :'https://bridgemotorsbucket.s3.amazonaws.com/static/images/Home/user_men.png'} rounded raised />
                 </div>
                 <div className="w-full flex justify-center py-4 lg:pt-4 pt-8">
                     <div className="p-4 text-center">
@@ -42,7 +42,7 @@ export default function ProfileCard() {
                 </div>
             </div>
             <div className="text-center">
-                <H5 color="gray">{user?.user?.displayName}</H5>
+                <H5 color="gray">{user?.user?.displayName ? user?.user?.displayName : 'Nombre Apellido'}</H5>
                 <div className="mt-0 mb-2 text-gray-700 flex items-center justify-center gap-2">
                     <Icon name="place" size="xl" />
                     Buenos Aires, Argentina

@@ -31,7 +31,10 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                     >
                         <Icon name="menu" size="2xl" color="white" />
                     </Button>
-                    <div className={`absolute top-2 md:hidden ${showSidebar === 'left-0' ? 'left-64' : '-left-64'} z-50 transition-all duration-300`}>
+                    <div
+                        className={`absolute top-2 md:hidden ${showSidebar === 'left-0' ? 'left-64' : '-left-64'
+                            } z-50 transition-all duration-300`}
+                    >
                         <Button
                             color="transparent"
                             buttonType="link"

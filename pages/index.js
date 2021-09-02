@@ -2,10 +2,9 @@ import Head from 'next/head'
 import StatusCard from '../components/StatusCard';
 import ChartLine from '../components/CharLine';
 import ChartBar from '../components/ChartBar';
-import PageVisitsCard from '../components/PageVisitsCard';
 import TrafficCard from '../components/TrafficCard';
-import { db } from '../firebase/client';
-import { getSession } from 'next-auth/client'
+import CoinsMarkets from '../components/CoinsMarkets';
+import { app } from '../firebase/client';
 
 export default function Home({markets, backend}) {
 
@@ -81,7 +80,7 @@ export default function Home({markets, backend}) {
           <div className="container mx-auto max-w-full">
             <div className="grid grid-cols-1 xl:grid-cols-1">
               <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14">
-                <PageVisitsCard markets={markets} />
+                <CoinsMarkets markets={markets} />
               </div>
               <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">
                 <TrafficCard />
@@ -99,6 +98,7 @@ export async function getServerSideProps(ctx) {
   const res = await fetch(`https://crypto-coins-virid.vercel.app/api/coins/markets`)
   const data = await res.json()
 
+  
 
 
   if (!data) {

@@ -12,8 +12,7 @@ export default function CoinsMarkets({ markets }) {
     useEffect(() => {
         setMarkets(markets)
     }, [markets])
-
-    console.log(state)
+    
     return (
         <Card>
             <CardHeader color="blue" contentPosition="none">

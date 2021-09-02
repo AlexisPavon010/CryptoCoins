@@ -1,4 +1,10 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app'
+import 'firebase/auth';
+import 'firebase/firestore';
+import 'firebase/analytics';
+
+let googleAuthProvider = {};
+let facebookAuthProvider = {};
 
 const firebaseConfig = {
     apiKey: "AIzaSyDtln2KCrL5a5dbeD89SCJgZdFy3MGhZgU",
@@ -15,8 +21,8 @@ const app = !firebase.apps.length
     : firebase.app()
 
 // const firebaseAnalytics = app.analytics();
-const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
-const facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
-const db = firebase.firestore();
+googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
+const db = firebase.firestore()
 
 export {app, db,  googleAuthProvider, facebookAuthProvider };

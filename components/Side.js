@@ -5,6 +5,7 @@ import Icon from '@material-tailwind/react/Icon';
 import H6 from '@material-tailwind/react/Heading6';
 
 export default function Sidebar() {
+    
     const [showSidebar, setShowSidebar] = useState('-left-64');
     return (
         <>
@@ -67,6 +68,16 @@ export default function Sidebar() {
                                     >
                                         <Icon name="map" size="2xl" />
                                         Maps
+                                    </a>
+                                </Link>
+                            </li>
+                            <li className="rounded-lg mb-2 text-white">
+                                <Link href='/map'>
+                                    <a
+                                        className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                    >
+                                        <Icon name="settings_system_daydream" size="2xl" />
+                                        Movimientos
                                     </a>
                                 </Link>
                             </li>

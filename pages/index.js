@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import StatusCard from '../components/StatusCard';
-import ChartLine from '../components/CharLine';
-import ChartBar from '../components/ChartBar';
+//import ChartLine from '../components/CharLine';
+//import ChartBar from '../components/ChartBar';
 import TrafficCard from '../components/TrafficCard';
 import CoinsMarkets from '../components/CoinsMarkets';
 
@@ -20,10 +20,10 @@ export default function Home({markets, backend}) {
           <div className="container mx-auto max-w-full">
             <div className="grid grid-cols-1 xl:grid-cols-5">
               <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14">
-                <ChartLine />
+                {/* <ChartLine /> */}
               </div>
               <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">
-                <ChartBar />
+                {/* <ChartBar /> */}
               </div>
             </div>
           </div>

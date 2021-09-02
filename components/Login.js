@@ -29,13 +29,15 @@ export default function Login({ children }) {
             await app.auth().signInWithEmailAndPassword(email, password)
             const currentUser = await app.auth().currentUser
             const firebaseToken = await app.auth().currentUser.getIdToken()
+            console.log(currentUser);
             await db.collection('user').doc(currentUser.uid).set({
                 token: firebaseToken,
                 uid: currentUser.uid,
                 email: currentUser.email,
                 displayName: currentUser.displayName,
+                photoURL: currentUser?.photoURL,
             })
-            console.log(currentUser)
+            
         }
         catch (e) {
             alert(e)
@@ -47,13 +49,15 @@ export default function Login({ children }) {
             await app.auth().signInWithPopup(provider)
             const currentUser = await app.auth().currentUser
             const firebaseToken = await app.auth().currentUser.getIdToken()
+            console.log(currentUser);
             await db.collection('user').doc(currentUser.uid).set({
                 token: firebaseToken,
                 uid: currentUser.uid,
                 email: currentUser.email,
                 displayName: currentUser.displayName,
+                photoURL: currentUser?.photoURL,
             })
-            console.log(firebaseToken)
+            
         }
         catch (e) {
             alert(e)

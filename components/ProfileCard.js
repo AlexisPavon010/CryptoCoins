@@ -35,7 +35,7 @@ export default function ProfileCard() {
                     </div>
                     <div className="p-4 text-center">
                         <span className="text-xl font-medium block uppercase tracking-wide text-gray-900">
-                            10
+                            15
                         </span>
                         <span className="text-sm text-gray-700">Operaciones</span>
                     </div>

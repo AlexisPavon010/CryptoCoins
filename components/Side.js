@@ -5,7 +5,7 @@ import Icon from '@material-tailwind/react/Icon';
 import H6 from '@material-tailwind/react/Heading6';
 
 export default function Sidebar() {
-    
+
     const [showSidebar, setShowSidebar] = useState('-left-64');
     return (
         <>
@@ -17,16 +17,9 @@ export default function Sidebar() {
                 className={`h-screen fixed top-0 md:left-0 ${showSidebar}  overflow-y-auto flex-row flex-nowrap overflow-hidden shadow-xl bg-gray-800  w-64 z-10 py-4 px-6 transition-all duration-300`}
             >
                 <div className="flex-col  items-stretch min-h-full flex-nowrap px-0 relative">
-                    <Link href='/'>
-                        <a
-                            href="/"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="mt-2 text-center w-full inline-block"
-                        >
-                            <H6 color="white">Material Tailwind</H6>
-                        </a>
-                    </Link>
+                    <div className='mt-2 text-center w-full inline-block'>
+                        <H6 color="white">Cryto Panel</H6>
+                    </div>
                     <div className="flex flex-col">
                         <hr className="my-4 min-w-full" />
 
@@ -41,17 +34,8 @@ export default function Sidebar() {
                                     </a>
                                 </Link>
                             </li>
-                            <li className="rounded-lg mb-2">
-                                <Link href='/settings'>
-                                    <a
-                                        className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    >
-                                        <Icon name="settings" size="2xl" />
-                                        Settings
-                                    </a>
-                                </Link>
-                            </li>
-                            <li className="rounded-lg mb-2 ">
+
+                            {/* <li className="rounded-lg mb-2 ">
                                 <Link href='/tables'>
                                     <a
                                         className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
@@ -60,24 +44,24 @@ export default function Sidebar() {
                                         Tables
                                     </a>
                                 </Link>
-                            </li>
+                            </li> */}
                             <li className="rounded-lg mb-2 text-white">
-                                <Link href='/map'>
-                                    <a
-                                        className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
-                                    >
-                                        <Icon name="map" size="2xl" />
-                                        Maps
-                                    </a>
-                                </Link>
-                            </li>
-                            <li className="rounded-lg mb-2 text-white">
-                                <Link href='/map'>
+                                <Link href='/movimientos'>
                                     <a
                                         className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
                                     >
                                         <Icon name="settings_system_daydream" size="2xl" />
                                         Movimientos
+                                    </a>
+                                </Link>
+                            </li>
+                            <li className="rounded-lg mb-2">
+                                <Link href='/settings'>
+                                    <a
+                                        className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                    >
+                                        <Icon name="settings" size="2xl" />
+                                        Configuracion
                                     </a>
                                 </Link>
                             </li>
@@ -118,7 +102,7 @@ export default function Sidebar() {
                                     Landing Page
                                 </a>
                             </li> */}
-                            <li className="px-4 rounded-lg mb-2 text-white">
+                            {/* <li className="px-4 rounded-lg mb-2 text-white">
                                 <Link href='/profile'>
                                     <a
                                         rel="noreferrer"
@@ -128,7 +112,7 @@ export default function Sidebar() {
                                         Profile Page
                                     </a>
                                 </Link>
-                            </li>
+                            </li> */}
                         </ul>
 
                     </div>

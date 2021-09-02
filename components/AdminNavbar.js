@@ -7,6 +7,7 @@ import DropdownItem from '@material-tailwind/react/DropdownItem';
 import { useRouter } from 'next/dist/client/router';
 import { app } from '../firebase/client';
 import useGetUserSession from '../hooks/useGetUserSession';
+import Link from 'next/link';
 
 export default function AdminNavbar({ showSidebar, setShowSidebar } ) {
     const user = useGetUserSession();
@@ -75,10 +76,14 @@ export default function AdminNavbar({ showSidebar, setShowSidebar } ) {
                                 }}
                             >
                                 <DropdownItem color="lightBlue">
-                                    Action
+                                   <Link href='/perfil'>
+                                   <a>Perfil</a>
+                                   </Link>
                                 </DropdownItem>
                                 <DropdownItem color="lightBlue">
-                                    Another Action
+                                <Link href='/configuracion'>
+                                   <a>Configurar Cuenta</a>
+                                   </Link>
                                 </DropdownItem>
                                 <DropdownItem onClick={()=> cerrarSesion()} color="lightBlue">
                                     Cerrar Sesion

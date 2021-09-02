@@ -1,7 +1,7 @@
-import StatusCard from '../components/StatusCard';
-import MapExample from '../components/MapExample';
+import TableCard from '../components/TableCard';
 
 export default function Map() {
+
     return (
         <>
             <div className="bg-gray-800 pt-14 pb-28 px-3 md:px-8 h-auto">
@@ -51,10 +51,10 @@ export default function Map() {
                 </div> */}
             </div>
 
-            <div className="px-3 md:px-8 h-auto -mt-28 mb-16">
+            <div className="px-3 md:px-8 h-auto -mt-24 mb-16">
                 <div className="container mx-auto max-w-full">
                     <div className="grid grid-cols-1 px-4 h-[600px]">
-                        <MapExample />
+                        <TableCard />
                     </div>
                 </div>
             </div>

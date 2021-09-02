@@ -9,7 +9,7 @@ import { app } from '../firebase/client';
 import useGetUserSession from '../hooks/useGetUserSession';
 
 export default function AdminNavbar({ showSidebar, setShowSidebar } ) {
-    const userB = useGetUserSession();
+    const user = useGetUserSession();
     const cerrarSesion = ()=> {
         console.log('salir')
         app.auth().signOut()
@@ -65,7 +65,7 @@ export default function AdminNavbar({ showSidebar, setShowSidebar } ) {
                                 buttonText={
                                     <div className="w-12">
                                         {/* <Icon name="account_circle" size="xl" /> */}
-                                        <Image src={userB?.user?.photoURL ? userB?.user?.photoURL : "https://bridgemotorsbucket.s3.amazonaws.com/static/images/Home/user_men.png"} rounded />
+                                        <Image src={user?.user?.photoURL ? user?.user?.photoURL : "https://bridgemotorsbucket.s3.amazonaws.com/static/images/Home/user_men.png"} rounded />
                                     </div>
                                 }
                                 rounded

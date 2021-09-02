@@ -9,9 +9,9 @@ import { app } from '../firebase/client';
 import useGetUserSession from '../hooks/useGetUserSession';
 import Link from 'next/link';
 
-export default function AdminNavbar({ showSidebar, setShowSidebar } ) {
+export default function AdminNavbar({ showSidebar, setShowSidebar }) {
     const user = useGetUserSession();
-    const cerrarSesion = ()=> {
+    const cerrarSesion = () => {
         console.log('salir')
         app.auth().signOut()
     }
@@ -32,9 +32,8 @@ export default function AdminNavbar({ showSidebar, setShowSidebar } ) {
                         <Icon name="menu" size="2xl" color="white" />
                     </Button>
                     <div
-                        className={`absolute top-2 md:hidden ${
-                            showSidebar === 'left-0' ? 'left-64' : '-left-64'
-                        } z-50 transition-all duration-300`}
+                        className={`absolute top-2 md:hidden ${showSidebar === 'left-0' ? 'left-64' : '-left-64'
+                            } z-50 transition-all duration-300`}
                     >
                         <Button
                             color="transparent"
@@ -76,20 +75,20 @@ export default function AdminNavbar({ showSidebar, setShowSidebar } ) {
                                 }}
                             >
                                 <Link href='/perfil'>
-                                <DropdownItem color="lightBlue">
-                                   
-                                   <a>Perfil</a>
-                                   
-                                </DropdownItem>
+                                    <a>
+                                        <DropdownItem color="lightBlue">
+                                            Perfil
+                                        </DropdownItem>
+                                    </a>
                                 </Link>
                                 <Link href='/configuracion'>
-                                <DropdownItem color="lightBlue">
-                                
-                                   <a>Configurar Cuenta</a>
-                                   
-                                </DropdownItem>
+                                    <a>
+                                        <DropdownItem color="lightBlue">
+                                            Configurar Cuenta
+                                        </DropdownItem>
+                                    </a>
                                 </Link>
-                                <DropdownItem onClick={()=> cerrarSesion()} color="lightBlue">
+                                <DropdownItem onClick={() => cerrarSesion()} color="lightBlue">
                                     Cerrar Sesion
                                 </DropdownItem>
                             </Dropdown>

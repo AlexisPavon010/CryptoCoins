@@ -42,7 +42,7 @@ export default function ProfileCard() {
                 </div>
             </div>
             <div className="text-center">
-                <H5 color="gray">{user?.user?.displayName}</H5>
+                <h2 color="gray">{user?.user?.displayName}</h2>
                 <div className="mt-0 mb-2 text-gray-700 flex items-center justify-center gap-2">
                     <Icon name="place" size="xl" />
                     Buenos Aires, Argentina

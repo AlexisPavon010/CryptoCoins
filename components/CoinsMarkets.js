@@ -2,18 +2,21 @@ import Card from '@material-tailwind/react/Card';
 import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
 import Button from '@material-tailwind/react/Button';
+import Pagination from "@material-tailwind/react/Pagination";
+import PaginationItem from "@material-tailwind/react/PaginationItem";
+import Icon from "@material-tailwind/react/Icon";
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import useMarketCoins from '../hooks/useMarketCoins';
 
-export default function CoinsMarkets({ markets }) {
+export default function CoinsMarkets() {
 
-    const [state, setMarkets] = useState(null)
+    const [page, setPages] = useState(1)
 
-    useEffect(() => {
-        setMarkets(markets)
-    }, [markets])
+    const data = useMarketCoins(page)
+    console.log(data)
 
-    console.log(state)
+    // console.log(state)
     return (
         <Card>
             <CardHeader color="blue" contentPosition="none">
@@ -59,13 +62,13 @@ export default function CoinsMarkets({ markets }) {
                         </thead>
                         <tbody>
                             {
-                                state?.map((coin, i) =>
+                                data.markets?.map((coin, i) =>
                                     <tr key={coin.id}>
                                         <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                                             {i + 1}
                                         </th>
                                         <th className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
-                                            <Image src={coin.image} height={30} width={30}  />
+                                            <Image src={coin.image} height={30} width={30} />
                                         </th>
                                         <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                                             {coin.name}
@@ -76,7 +79,7 @@ export default function CoinsMarkets({ markets }) {
                                         <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
                                             {coin.price_change_24h}
                                         </td>
-                                        <td className={` ${coin.price_change_percentage_24h > 0 ? 'text-green-600' : 'text-red-600' } border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left`}>
+                                        <td className={` ${coin.price_change_percentage_24h > 0 ? 'text-green-600' : 'text-red-600'} border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left`}>
                                             {coin.price_change_percentage_24h}
                                         </td>
                                         <td className="border-b border-gray-200 align-middle font-light text-sm whitespace-nowrap px-2 py-4 text-left">
@@ -90,6 +93,22 @@ export default function CoinsMarkets({ markets }) {
                     </table>
                 </div>
             </CardBody>
+            <Pagination className='overflow-hidden'>
+                <PaginationItem className='cursor-pointer' onClick={()=> setPages(1)} ripple="dark">
+                    <Icon name="keyboard_arrow_left" />
+                </PaginationItem>
+                <PaginationItem className='cursor-pointer' onClick={()=> setPages(1)} ripple="light">1</PaginationItem>
+                <PaginationItem className='cursor-pointer' onClick={()=> setPages(2)} ripple="dark">2</PaginationItem>
+                <PaginationItem className='cursor-pointer' onClick={()=> setPages(3)} ripple="dark">3</PaginationItem>
+                <PaginationItem className='cursor-pointer' onClick={()=> setPages(4)} ripple="dark">4</PaginationItem>
+                <PaginationItem className='cursor-pointer' onClick={()=> setPages(5)} ripple="dark">5</PaginationItem>
+                <PaginationItem className='cursor-pointer' onClick={()=> setPages(6)} ripple="dark">6</PaginationItem>
+                <PaginationItem className='cursor-pointer' onClick={()=> setPages(7)} ripple="dark">7</PaginationItem>
+                <PaginationItem className='cursor-pointer' onClick={()=> setPages(8)} ripple="dark">8</PaginationItem>
+                <PaginationItem className='cursor-pointer' onClick={()=> setPages(91)} ripple="dark">
+                    <Icon name="keyboard_arrow_right" />
+                </PaginationItem>
+            </Pagination>
         </Card>
     );
 }

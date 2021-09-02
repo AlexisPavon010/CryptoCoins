@@ -2,10 +2,9 @@ import Head from 'next/head'
 import StatusCard from '../components/StatusCard';
 import ChartLine from '../components/CharLine';
 import ChartBar from '../components/ChartBar';
-import PageVisitsCard from '../components/PageVisitsCard';
 import TrafficCard from '../components/TrafficCard';
-import { db } from '../firebase/client';
-import { getSession } from 'next-auth/client'
+import CoinsMarkets from '../components/CoinsMarkets';
+
 
 export default function Home({markets, backend}) {
 
@@ -16,8 +15,8 @@ export default function Home({markets, backend}) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
-        <div className="bg-gray-800 px-3 md:px-8 h-40" />
-        <div className="px-3 md:px-8 -mt-24">
+        <div className="bg-gray-800  h-40" />
+        <div className="px-3  -mt-24">
           <div className="container mx-auto max-w-full">
             <div className="grid grid-cols-1 xl:grid-cols-5">
               <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14">
@@ -77,11 +76,11 @@ export default function Home({markets, backend}) {
           </div>
         </div>
 
-        <div className="px-3 md:px-8 h-auto">
+        <div className="px-3 md:px-3 h-auto">
           <div className="container mx-auto max-w-full">
             <div className="grid grid-cols-1 xl:grid-cols-1">
-              <div className="xl:col-start-1 xl:col-end-4 px-4 mb-14">
-                <PageVisitsCard markets={markets} />
+              <div className="xl:col-start-1 xl:col-end-4  mb-14">
+                <CoinsMarkets markets={markets} />
               </div>
               <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">
                 <TrafficCard />

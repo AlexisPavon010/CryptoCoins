@@ -1,71 +1,46 @@
 import Card from '@material-tailwind/react/Card';
-import CardHeader from '@material-tailwind/react/CardHeader';
 import CardBody from '@material-tailwind/react/CardBody';
 import CardFooter from '@material-tailwind/react/CardFooter';
-import H5 from '@material-tailwind/react/Heading5';
 import InputIcon from '@material-tailwind/react/InputIcon';
-import Checkbox from '@material-tailwind/react/Checkbox';
 import Button from '@material-tailwind/react/Button';
-import Register from './Register'
 import { useState } from 'react';
-import { app, db, googleAuthProvider, facebookAuthProvider } from '../firebase/client';
+import { app, db } from '../firebase/client';
 import Head from 'next/head';
 
 
-export default function Login({ children }) {
 
-    const [user, setUser] = useState(null)
-    const [register, setRegister] = useState(false)
+export default function Register({ setRegister }) {
+
+
+    const [state, setUser] = useState(null)
 
     const handleInputChange = (e) => {
         e.preventDefault()
         const { name, value } = e.target
-        setUser({ ...user, [name]: value })
+        setUser({ ...state, [name]: value })
     }
 
     const iniciarSesion = async () => {
-        const { email, password } = user
+        const { email, password } = state
         try {
-            await app.auth().signInWithEmailAndPassword(email, password)
-            const currentUser = await app.auth().currentUser
-            const firebaseToken = await app.auth().currentUser.getIdToken()
-            await db.collection('user').doc(currentUser.uid).set({
-                token: firebaseToken,
-                uid: currentUser.uid,
-                email: currentUser.email,
-                displayName: currentUser.displayName,
+            await app.auth().createUserWithEmailAndPassword(email, password).then(userRegister => {
+                db.collection('user').doc(userRegister.user.uid).set({
+                    token: userRegister.user.refreshToken,
+                    uid: userRegister.user.uid,
+                    email: userRegister.user.email,
+                    displayName: userRegister.user.displayName,
+                })
             })
-            console.log(currentUser)
         }
         catch (e) {
             alert(e)
         }
     }
-    const iniciarSesionProviders = async (provider) => {
-
-        try {
-            await app.auth().signInWithPopup(provider)
-            const currentUser = await app.auth().currentUser
-            const firebaseToken = await app.auth().currentUser.getIdToken()
-            await db.collection('user').doc(currentUser.uid).set({
-                token: firebaseToken,
-                uid: currentUser.uid,
-                email: currentUser.email,
-                displayName: currentUser.displayName,
-            })
-            console.log(firebaseToken)
-        }
-        catch (e) {
-            alert(e)
-        }
-    }
-
-    if(register === true) return <Register setRegister={setRegister} />
 
     return (
         <>
             <Head>
-                <title>Iniciar | Crypto Coins</title>
+                <title>Registrarse | Crypto Coins</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="bg-login-background bg-cover bg-center w-screen h-screen relative flex flex-col justify-center">
@@ -81,11 +56,11 @@ export default function Login({ children }) {
                             <CardBody>
                                 <div className="mb-12 px-4 bg-bb">
                                     <InputIcon
-                                         type="email"
-                                         color="lightBlue"
-                                         placeholder="Email Address"
-                                         iconName=""
-                                         name='email'
+                                        type="email"
+                                        color="lightBlue"
+                                        placeholder="Email Address"
+                                        iconName=""
+                                        name='email'
                                         onChange={handleInputChange}
                                     />
                                 </div>
@@ -99,63 +74,60 @@ export default function Login({ children }) {
                                         onChange={handleInputChange}
                                     />
                                 </div>
-                                <div className="mb-4 px-4">
-                                    {/* <Checkbox
+                                {/* <div className="mb-8 px-4">
+                                    <InputIcon
+                                        type="password"
+                                        color="lightBlue"
+                                        placeholder="Password"
+                                        iconName=""
+                                        name='password'
+                                        onChange={handleInputChange}
+                                    />
+                                </div> */}
+                                {/* <div className="mb-4 px-4">
+                                    <Checkbox
                                         color="lightBlue"
                                         text="Remember Me"
                                         id="remember"
-                                    /> */}
-                                </div>
+                                    />
+                                </div> */}
                             </CardBody>
                             <CardFooter>
-                                <div className="flex mb-8  justify-center bg-bb">
+                                <div className="flex justify-center mb-4  bg-bb">
                                     <Button
                                         onClick={iniciarSesion}
                                         color="lightBlue"
-                                        buttonType="filled"
-                                        block={true}
+                                        buttonType="link"
                                         size="lg"
                                         ripple="dark"
                                     >
-                                        Ingresar
+                                        Registrarme
                                     </Button>
+
                                 </div>
-                                <div className='mb-4'>
+                                <div className="flex justify-center bg-bb">
+                                    <p className='cursor-pointer' onClick={() => setRegister(false)} >Volver</p>
+                                </div>
+                                {/* <div className='flex justify-between'>
                                     <Button
                                         onClick={() => iniciarSesionProviders(googleAuthProvider)}
-                                        color="blueGray"
-                                        buttonType="filled"
+                                        color="lightBlue"
+                                        buttonType="link"
                                         size="lg"
-                                        block={true}
                                         ripple="dark"
                                     >
                                         Google
                                     </Button>
-                                    </div>
-                                    <div className='mb-4'>
                                     <Button
                                         onClick={() => iniciarSesionProviders(facebookAuthProvider)}
-                                        color="blueGray"
-                                        buttonType="filled"
-                                        block={true}
-                                        size="lg"
-                                        ripple="ligth"
-                                    >
-                                        Facebook
-                                    </Button>
-                                </div>
-                                <div className=''>
-                                    <Button
-                                        onClick={() => setRegister(true)}
-                                        color="blueGray"
+                                        color="lightBlue"
                                         buttonType="link"
-                                        block={true}
                                         size="lg"
                                         ripple="dark"
                                     >
-                                        Registrarse
+                                        Facebook
                                     </Button>
-                                </div>
+                                </div> */}
                             </CardFooter>
                         </Card>
                     </div>

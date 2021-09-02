@@ -75,16 +75,20 @@ export default function AdminNavbar({ showSidebar, setShowSidebar } ) {
                                     color: 'transparent',
                                 }}
                             >
+                                <Link href='/perfil'>
                                 <DropdownItem color="lightBlue">
-                                   <Link href='/perfil'>
+                                   
                                    <a>Perfil</a>
-                                   </Link>
+                                   
                                 </DropdownItem>
-                                <DropdownItem color="lightBlue">
+                                </Link>
                                 <Link href='/configuracion'>
+                                <DropdownItem color="lightBlue">
+                                
                                    <a>Configurar Cuenta</a>
-                                   </Link>
+                                   
                                 </DropdownItem>
+                                </Link>
                                 <DropdownItem onClick={()=> cerrarSesion()} color="lightBlue">
                                     Cerrar Sesion
                                 </DropdownItem>

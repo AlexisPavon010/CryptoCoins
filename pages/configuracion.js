@@ -1,9 +1,14 @@
+import Head from 'next/head'
 import StatusCard from '../components/StatusCard';
 import UserConfig from '../components/UserConfig';
 
 export default function Dashboard() {
     return (
         <>
+            <Head>
+                <title>Configurar Cuenta</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <div className="bg-gray-800 pt-14 pb-28 px-3 md:px-8 h-auto">
             </div>
 

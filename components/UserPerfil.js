@@ -11,9 +11,6 @@ import useGetUserSession from '../hooks/useGetUserSession';
 
 export default function ProfileCard() {
     const user = useGetUserSession();
-    console.log("****test****");
-    console.log(user.user);
-    console.log("****test****");
     return (
         <Card>
             <div className="flex flex-wrap justify-center">

@@ -1,9 +1,14 @@
+import Head from 'next/head'
 import TableCard from '../components/TableCard';
 
 export default function Map() {
 
     return (
         <>
+            <Head>
+                <title>Movimientos</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <div className="bg-gray-800 pt-14 pb-28 px-3 md:px-8 h-auto">
                 {/* <div className="container mx-auto max-w-full">
                     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4">

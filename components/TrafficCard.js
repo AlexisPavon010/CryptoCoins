@@ -19,13 +19,13 @@ export default function TrafficCard() {
     }
 
 
-    useEffect(() => {
-        app.auth().onAuthStateChanged(user => setUser(user))
-        if (backend == null) {
-            getData()
-        }
+    // useEffect(() => {
+    //     app.auth().onAuthStateChanged(user => setUser(user))
+    //     if (backend == null) {
+    //         getData()
+    //     }
 
-    }, [user])
+    // }, [user])
 
     return (
         <Card>

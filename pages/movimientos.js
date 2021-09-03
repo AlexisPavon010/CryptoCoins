@@ -1,4 +1,4 @@
-import TableCard from '../components/TableCard';
+import MovimientoTable from '../components/Movimientos/MovimientoTable'
 
 export default function Map() {
 
@@ -54,7 +54,7 @@ export default function Map() {
             <div className="px-3 md:px-8 h-auto -mt-24 mb-16">
                 <div className="container mx-auto max-w-full">
                     <div className="grid grid-cols-1 px-4 h-[600px]">
-                        <TableCard />
+                        <MovimientoTable />
                     </div>
                 </div>
             </div>

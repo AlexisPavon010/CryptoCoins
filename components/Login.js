@@ -35,8 +35,9 @@ export default function Login({ children }) {
                 email: currentUser.email,
                 displayName: currentUser.displayName,
                 photoURL: currentUser?.photoURL,
+                creado: Date()
             })
-            
+
         }
         catch (e) {
             alert(e)
@@ -56,14 +57,14 @@ export default function Login({ children }) {
                 displayName: currentUser.displayName,
                 photoURL: currentUser?.photoURL,
             })
-            
+
         }
         catch (e) {
             alert(e)
         }
     }
 
-    if(register === true) return <Register setRegister={setRegister} />
+    if (register === true) return <Register setRegister={setRegister} />
 
     return (
         <>
@@ -84,11 +85,11 @@ export default function Login({ children }) {
                             <CardBody>
                                 <div className="mb-12 px-4 bg-bb">
                                     <InputIcon
-                                         type="email"
-                                         color="lightBlue"
-                                         placeholder="Email Address"
-                                         iconName=""
-                                         name='email'
+                                        type="email"
+                                        color="lightBlue"
+                                        placeholder="Email Address"
+                                        iconName=""
+                                        name='email'
                                         onChange={handleInputChange}
                                     />
                                 </div>
@@ -134,8 +135,8 @@ export default function Login({ children }) {
                                     >
                                         Google
                                     </Button>
-                                    </div>
-                                    <div className='mb-4'>
+                                </div>
+                                <div className='mb-4'>
                                     <Button
                                         onClick={() => iniciarSesionProviders(facebookAuthProvider)}
                                         color="blueGray"

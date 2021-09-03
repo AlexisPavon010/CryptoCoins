@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 import Head from 'next/head'
 import TableCard from '../components/TableCard';
-=======
-import MovimientoTable from '../components/Movimientos/MovimientoTable'
->>>>>>> 691855e787b7708c621f0aff460332f18423add8
 
 export default function Map() {
 

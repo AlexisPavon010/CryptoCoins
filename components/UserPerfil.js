@@ -13,7 +13,6 @@ import { app, db, storage } from '../firebase/client';
 
 export default function ProfileCard() {
 
-    const user = useGetUserSession();
     const [user, setUser] = useState(undefined)
     const [state, setBacken] = useState(null)
 

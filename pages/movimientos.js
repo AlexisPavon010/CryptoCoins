@@ -1,7 +1,9 @@
 import Head from 'next/head'
 import TableCard from '../components/TableCard';
+import MovimientoTable from '../components/Movimientos/MovimientoTable'
 
-export default function Map() {
+
+export default function Movimientos() {
 
     return (
         <>

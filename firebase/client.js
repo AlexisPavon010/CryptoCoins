@@ -1,6 +1,7 @@
 import firebase from 'firebase/app'
 import 'firebase/auth';
 import 'firebase/firestore';
+import 'firebase/storage';
 import 'firebase/analytics';
 
 let googleAuthProvider = {};
@@ -24,5 +25,6 @@ const app = !firebase.apps.length
 googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 facebookAuthProvider = new firebase.auth.FacebookAuthProvider();
 const db = firebase.firestore()
+const storage = firebase.storage();
 
-export {app, db,  googleAuthProvider, facebookAuthProvider };
+export {app, db, storage, googleAuthProvider, facebookAuthProvider };

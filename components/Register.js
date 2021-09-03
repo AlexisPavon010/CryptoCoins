@@ -29,6 +29,7 @@ export default function Register({ setRegister }) {
                     uid: userRegister.user.uid,
                     email: userRegister.user.email,
                     displayName: userRegister.user.displayName,
+                    creado: Date()
                 })
             })
         }

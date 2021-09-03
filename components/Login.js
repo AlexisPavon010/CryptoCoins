@@ -35,7 +35,6 @@ export default function Login({ children }) {
                 email: currentUser.email,
                 displayName: currentUser.displayName,
                 photoURL: currentUser?.photoURL,
-                creado: Date()
             })
 
         }

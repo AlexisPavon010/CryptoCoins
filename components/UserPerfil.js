@@ -7,12 +7,12 @@ import Icon from '@material-tailwind/react/Icon';
 import LeadText from '@material-tailwind/react/LeadText';
 import Button from '@material-tailwind/react/Button';
 import useGetUserSession from '../hooks/useGetUserSession';
-import { useEffect, useState } from 'react';
-import { app, db } from '../firebase/client';
+import { useEffect, useRef, useState } from 'react';
+import { app, db, storage } from '../firebase/client';
 // import ProfilePicture from 'assets/img/team-1-800x800.jpg';
 
 export default function ProfileCard() {
-    
+
     const [user, setUser] = useState(undefined)
     const [state, setBacken] = useState(null)
 
@@ -32,6 +32,70 @@ export default function ProfileCard() {
     }, [user])
 
 
+    // SubirImage
+    const [file, setFile] = useState(null)
+
+    const filePikerRef = useRef(null)
+
+    const DocChangeValue = (e) => {
+        e.preventDefault()
+        const reader = new FileReader()
+        if (e.target.files[0]) {
+            reader.readAsDataURL(e.target.files[0])
+            console.log(e.target.files[0])
+        }
+        reader.onload = (readerEvent)=> {
+            // console.log(readerEvent.target.result)
+            // setFile(readerEvent.target.result)
+            subirImagenDb(readerEvent.target.result)
+        }
+        // console.log(file)
+        // subirImagenDb(e.target.files[0])
+    }
+
+
+    const subirImagenDb = async (archivo) => {
+        console.log('ejecuto')
+        db.collection('user').doc(user.uid).get()
+            .then(doc => {
+                // console.log(doc)
+                // console.log(archivo)
+                if (archivo) {
+                    // var metadata = {
+                    //     contentType: archivo.type,
+                    // };
+                    const task = storage.ref(`imagenes-subidas/${user.uid}`).putString(archivo, 'data_url')
+                    console.log('Db uploading')
+                    // setWork(initialState)
+                    setFile(null)
+                    task.on('state_changed',
+                        null,
+                        (err) => {
+                            console.log(err)
+                        },
+                        () => {
+                            // notify()
+                            storage.ref(`imagenes-subidas/${user.uid}`).getDownloadURL().then(url => {
+                                console.log(url)
+                                db.collection('user').doc(user.uid).set({
+                                    photoURL: url
+                                },
+                                    { merge: true })
+                            })
+                            console.log('document uploading')
+                        }
+                    )
+                }
+            }
+            )
+    }
+
+    const OpenFile = (e) => {
+        e.preventDefault()
+        filePikerRef.current.click()
+        console.log(filePikerRef.current)
+    }
+
     return (
         <>
             <Head>
@@ -39,8 +103,16 @@ export default function ProfileCard() {
             </Head>
             <Card>
                 <div className="flex flex-wrap justify-center">
-                    <div className="w-48 px-4 -mt-24">
-                        <Image src={user?.photoURL ? user?.photoURL : 'https://bridgemotorsbucket.s3.amazonaws.com/static/images/Home/user_men.png'} rounded raised />
+                    <div  onClick={()=> filePikerRef.current.click()} className="w-48 px-4  -mt-20 cursor-pointer">
+                        <Image style={{height: "160px"}} className='object-cover' src={user?.photoURL ? user?.photoURL : state?.photoURL } rounded raised/>
+
+                     
+                        <input
+                            type='file'
+                            onChange={DocChangeValue}
+                            ref={filePikerRef}
+                            hidden
+                        />
                     </div>
                     <div className="w-full flex justify-center py-4 lg:pt-4 pt-8">
                         <div className="p-4 text-center">
@@ -68,7 +140,7 @@ export default function ProfileCard() {
                         <h2 color="gray">{state?.displayName ? state?.displayName : user?.email}</h2>
                     </div>
                     <div className="mt-0 mb-2 text-gray-700 flex items-center justify-center gap-2">
-                       {state?.email ? state?.email : user?.email}
+                        {state?.email ? state?.email : user?.email}
                     </div>
                     <div className="mt-0 mb-2 text-gray-700 flex items-center justify-center gap-2">
                         <Icon name="place" size="xl" />

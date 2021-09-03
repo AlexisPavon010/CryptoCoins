@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import Head from 'next/head'
 import TableCard from '../components/TableCard';
+=======
+import MovimientoTable from '../components/Movimientos/MovimientoTable'
+>>>>>>> 691855e787b7708c621f0aff460332f18423add8
 
 export default function Map() {
 
@@ -59,7 +63,7 @@ export default function Map() {
             <div className="px-3 md:px-8 h-auto -mt-24 mb-16">
                 <div className="container mx-auto max-w-full">
                     <div className="grid grid-cols-1 px-4 h-[600px]">
-                        <TableCard />
+                        <MovimientoTable />
                     </div>
                 </div>
             </div>

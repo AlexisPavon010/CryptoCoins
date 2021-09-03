@@ -4,6 +4,8 @@ import StatusCard from '../components/StatusCard';
 //import ChartBar from '../components/ChartBar';
 import TrafficCard from '../components/TrafficCard';
 import CoinsMarkets from '../components/CoinsMarkets';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Home({markets, backend}) {
@@ -11,11 +13,12 @@ export default function Home({markets, backend}) {
   return (
     <div>
       <Head>
-        <title>Next-Tailwind | Crypto Coins</title>
+        <title>Dashboard | Crypto Coins</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <>
         <div className="bg-gray-800  h-40" />
+        <ToastContainer />
         <div className="px-3  -mt-24">
           <div className="container mx-auto max-w-full">
             <div className="grid grid-cols-1 xl:grid-cols-5">
@@ -82,7 +85,7 @@ export default function Home({markets, backend}) {
               <div className="xl:col-start-1 xl:col-end-4  mb-14">
                 <CoinsMarkets markets={markets} />
               </div>
-              <div className="xl:col-start-4 xl:col-end-6 px-4 mb-14">
+              <div className="xl:col-start-1 xl:col-end-6 px-4 mb-14">
                 <TrafficCard />
               </div>
             </div>
@@ -97,8 +100,6 @@ export default function Home({markets, backend}) {
 export async function getServerSideProps(ctx) {
   const res = await fetch(`https://crypto-coins-virid.vercel.app/api/coins/markets`)
   const data = await res.json()
-
-
 
   if (!data) {
     return {

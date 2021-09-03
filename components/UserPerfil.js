@@ -13,6 +13,7 @@ import { app, db, storage } from '../firebase/client';
 
 export default function ProfileCard() {
 
+    const user = useGetUserSession();
     const [user, setUser] = useState(undefined)
     const [state, setBacken] = useState(null)
 
@@ -95,6 +96,7 @@ export default function ProfileCard() {
         filePikerRef.current.click()
         console.log(filePikerRef.current)
     }
+
 
     return (
         <>

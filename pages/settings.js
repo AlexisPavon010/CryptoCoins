@@ -1,9 +1,14 @@
 import StatusCard from '../components/StatusCard';
+import Head from 'next/head'
 import SettingsForm from '../components/SettingsForm';
 
 export default function Dashboard() {
     return (
         <>
+            <Head>
+                <title>Configuracion</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <div className="bg-gray-800 pt-14 pb-28 px-3 md:px-8 h-auto">
             </div>
 

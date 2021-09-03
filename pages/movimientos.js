@@ -1,9 +1,18 @@
+<<<<<<< HEAD
+import Head from 'next/head'
+import TableCard from '../components/TableCard';
+=======
 import MovimientoTable from '../components/Movimientos/MovimientoTable'
+>>>>>>> 691855e787b7708c621f0aff460332f18423add8
 
 export default function Map() {
 
     return (
         <>
+            <Head>
+                <title>Movimientos</title>
+                <link rel="icon" href="/favicon.ico" />
+            </Head>
             <div className="bg-gray-800 pt-14 pb-28 px-3 md:px-8 h-auto">
                 {/* <div className="container mx-auto max-w-full">
                     <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4">

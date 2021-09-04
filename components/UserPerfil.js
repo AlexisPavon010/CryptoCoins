@@ -6,32 +6,37 @@ import Head from 'next/head';
 import Icon from '@material-tailwind/react/Icon';
 import LeadText from '@material-tailwind/react/LeadText';
 import Button from '@material-tailwind/react/Button';
-import useGetUserSession from '../hooks/useGetUserSession';
+import { useCollection } from 'react-firebase-hooks/firestore';
 import { useEffect, useRef, useState } from 'react';
 import { app, db, storage } from '../firebase/client';
-// import ProfilePicture from 'assets/img/team-1-800x800.jpg';
+import nookies from 'nookies'
 
-export default function ProfileCard() {
+export default function ProfileCard({ userFb }) {
+
 
     const usera = useGetUserSession();
     const [user, setUser] = useState(undefined)
     const [state, setBacken] = useState(null)
 
+    useEffect(() => {
+        app.auth().onAuthStateChanged(user => setUser(user))
+    }, [])
+
+
+    const [realTimeData, loadig, error] = useCollection(
+        db.collection('user').doc(user?.uid)
+    )
+
+    console.log(realTimeData?.data())
+
     const getData = async () => {
-        const rst = await db.collection('user').doc(user?.uid).get()
+        const rst = await db.collection('user').doc(userFb?.uid).get()
         const rest = rst.data()
         // const rest = data.map(d => d.data())
         setBacken(rest)
     }
 
-
-    useEffect(() => {
-        app.auth().onAuthStateChanged(user => setUser(user))
-        if (state == null) {
-            getData()
-        }
-    }, [user])
-
+  
 
     // SubirImage
     const [file, setFile] = useState(null)
@@ -45,7 +50,7 @@ export default function ProfileCard() {
             reader.readAsDataURL(e.target.files[0])
             console.log(e.target.files[0])
         }
-        reader.onload = (readerEvent)=> {
+        reader.onload = (readerEvent) => {
             // console.log(readerEvent.target.result)
             // setFile(readerEvent.target.result)
             subirImagenDb(readerEvent.target.result)
@@ -57,7 +62,7 @@ export default function ProfileCard() {
 
     const subirImagenDb = async (archivo) => {
         console.log('ejecuto')
-        db.collection('user').doc(user.uid).get()
+        db.collection('user').doc(userFb.uid).get()
             .then(doc => {
                 // console.log(doc)
                 // console.log(archivo)
@@ -65,7 +70,7 @@ export default function ProfileCard() {
                     // var metadata = {
                     //     contentType: archivo.type,
                     // };
-                    const task = storage.ref(`imagenes-subidas/${user.uid}`).putString(archivo, 'data_url')
+                    const task = storage.ref(`imagenes-subidas/${userFb.uid}`).putString(archivo, 'data_url')
                     console.log('Db uploading')
                     // setWork(initialState)
                     setFile(null)
@@ -76,9 +81,9 @@ export default function ProfileCard() {
                         },
                         () => {
                             // notify()
-                            storage.ref(`imagenes-subidas/${user.uid}`).getDownloadURL().then(url => {
+                            storage.ref(`imagenes-subidas/${userFb.uid}`).getDownloadURL().then(url => {
                                 console.log(url)
-                                db.collection('user').doc(user.uid).set({
+                                db.collection('user').doc(userFb.uid).set({
                                     photoURL: url
                                 },
                                     { merge: true })
@@ -105,10 +110,15 @@ export default function ProfileCard() {
             </Head>
             <Card>
                 <div className="flex flex-wrap justify-center">
+<<<<<<< HEAD
                     <div  onClick={()=> filePikerRef.current.click()} className="w-48 px-4  -mt-20 cursor-pointer">
                         <Image style={{height: "160px"}} className='object-cover' src={user?.photoURL ? user?.photoURL : state?.photoURL } rounded raised/>
+=======
+                    <div onClick={() => filePikerRef.current.click()} className="w-48 px-4  -mt-20 cursor-pointer">
+                        <Image style={{ height: "160px" }} className='object-cover' src={realTimeData?.data().photoURL ? realTimeData?.data().photoURL : user?.photoURL || 'https://bridgemotorsbucket.s3.amazonaws.com/static/images/Home/user_men.png' } rounded raised />
 
-                     
+>>>>>>> 4f5716451adef7424ca42df4b89a6ace86d72220
+
                         <input
                             type='file'
                             onChange={DocChangeValue}
@@ -139,10 +149,10 @@ export default function ProfileCard() {
                 </div>
                 <div className="text-center">
                     <div className='mb-2'>
-                        <h2 color="gray">{state?.displayName ? state?.displayName : user?.email}</h2>
+                        <h2 color="gray">{realTimeData?.data().displayName ? realTimeData?.data().displayName : user?.email}</h2>
                     </div>
                     <div className="mt-0 mb-2 text-gray-700 flex items-center justify-center gap-2">
-                        {state?.email ? state?.email : user?.email}
+                        {realTimeData?.data().email ? realTimeData?.data().email : user?.email}
                     </div>
                     <div className="mt-0 mb-2 text-gray-700 flex items-center justify-center gap-2">
                         <Icon name="place" size="xl" />
@@ -184,4 +194,16 @@ export default function ProfileCard() {
             </Card>
         </>
     );
+}
+
+export async function getServerSideProps(ctx) {
+
+    const cookies = nookies.get(ctx)
+
+    console.log(cookies)
+
+
+    return {
+        props: {}
+    }
 }

@@ -8,7 +8,8 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export default function Home({markets, backend}) {
+export default function Home(props) {
+  console.log(props)
 
   return (
     <div>
@@ -83,7 +84,7 @@ export default function Home({markets, backend}) {
           <div className="container mx-auto max-w-full">
             <div className="grid grid-cols-1 xl:grid-cols-1">
               <div className="xl:col-start-1 xl:col-end-4  mb-14">
-                <CoinsMarkets markets={markets} />
+                <CoinsMarkets  />
               </div>
               <div className="xl:col-start-1 xl:col-end-6 px-4 mb-14">
                 <TrafficCard />
@@ -100,6 +101,8 @@ export default function Home({markets, backend}) {
 export async function getServerSideProps(ctx) {
   const res = await fetch(`https://crypto-coins-virid.vercel.app/api/coins/markets`)
   const data = await res.json()
+
+  // console.log(data)
 
   if (!data) {
     return {

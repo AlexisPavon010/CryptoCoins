@@ -26,16 +26,14 @@ export default function Login({ children }) {
         const { email, password } = user
         try {
             await app.auth().signInWithEmailAndPassword(email, password)
-            const currentUser = await app.auth().currentUser
-            const firebaseToken = await app.auth().currentUser.getIdToken()
-            console.log(currentUser);
-            await db.collection('user').doc(currentUser.uid).set({
-                token: firebaseToken,
-                uid: currentUser.uid,
-                email: currentUser.email,
-                displayName: currentUser.displayName,
-                photoURL: currentUser?.photoURL,
-            })
+            // const currentUser = await app.auth().currentUser
+            // const firebaseToken = await app.auth().currentUser.getIdToken()
+            // console.log(currentUser);
+            // await db.collection('user').doc(currentUser.uid).set({
+            //     token: firebaseToken,
+            //     uid: currentUser.uid,
+            //     email: currentUser.email,
+            // })
 
         }
         catch (e) {

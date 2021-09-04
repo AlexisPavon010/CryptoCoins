@@ -111,7 +111,7 @@ export default function ProfileCard({ userFb }) {
             <Card>
                 <div className="flex flex-wrap justify-center">
                     <div  onClick={()=> filePikerRef.current.click()} className="w-48 px-4  -mt-20 cursor-pointer">
-                        <Image style={{height: "160px"}} className='object-cover' src={realTimeData.data()?.photoURL ? realTimeData.data()?.photoURL  : state?.photoURL } rounded raised/>
+                        <Image style={{height: "160px"}} className='object-cover' src={realTimeData?.data()?.photoURL ? realTimeData?.data()?.photoURL  : state?.photoURL } rounded raised/>
 
                         <input
                             type='file'

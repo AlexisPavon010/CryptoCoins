@@ -110,14 +110,8 @@ export default function ProfileCard({ userFb }) {
             </Head>
             <Card>
                 <div className="flex flex-wrap justify-center">
-<<<<<<< HEAD
                     <div  onClick={()=> filePikerRef.current.click()} className="w-48 px-4  -mt-20 cursor-pointer">
                         <Image style={{height: "160px"}} className='object-cover' src={user?.photoURL ? user?.photoURL : state?.photoURL } rounded raised/>
-=======
-                    <div onClick={() => filePikerRef.current.click()} className="w-48 px-4  -mt-20 cursor-pointer">
-                        <Image style={{ height: "160px" }} className='object-cover' src={realTimeData?.data().photoURL ? realTimeData?.data().photoURL : user?.photoURL || 'https://bridgemotorsbucket.s3.amazonaws.com/static/images/Home/user_men.png' } rounded raised />
-
->>>>>>> 4f5716451adef7424ca42df4b89a6ace86d72220
 
                         <input
                             type='file'

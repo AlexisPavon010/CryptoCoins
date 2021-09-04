@@ -46,6 +46,17 @@ export default function Sidebar() {
                                 </Link>
                             </li> */}
                             <li className="rounded-lg mb-2 text-white">
+                                <Link href='/trade'>
+                                    <a
+                                        className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
+                                    >
+                                        <Icon name="settings_system_daydream" size="2xl" />
+                                        Trade
+                                    </a>
+                                </Link>
+                            </li>
+
+                            <li className="rounded-lg mb-2 text-white">
                                 <Link href='/movimientos'>
                                     <a
                                         className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
@@ -55,6 +66,7 @@ export default function Sidebar() {
                                     </a>
                                 </Link>
                             </li>
+
                             <li className="rounded-lg mb-2">
                                 <Link href='/settings'>
                                     <a

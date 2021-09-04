@@ -5,26 +5,43 @@ import Side from '../components/Side'
 import Login from '../components/Login';
 import { app } from '../firebase/client';
 import { useEffect, useState } from 'react';
+import authUser from '../hooks/useFirebaseAuth'
+import { AuthUserProvider } from '../AuthUserContext';
+import { parseCookies, setCookie, destroyCookie } from 'nookies'
+
 
 
 function MyApp({ Component, pageProps }) {
 
+
   const [user, setUser] = useState(undefined)
- 
+
+
+
+  const guardarUsuario = (user) => {
+    // console.log(user)
+    setUser(user)
+    setCookie(null, 'token', user.uid, {
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/',
+    })
+
+  }
 
 
   useEffect(() => {
-    app.auth().onAuthStateChanged(user => setUser(user))
+    app.auth().onAuthStateChanged(user => guardarUsuario(user))
+    
   }, [])
 
- if( user === undefined ) return <></>
-  else if (!user) return <Login/>
+  if (user === undefined) return <></>
+  else if (!user) return <Login />
 
 
   return (
     <>
       <Head>
-      <link
+        <link
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet"
         />
@@ -36,8 +53,10 @@ function MyApp({ Component, pageProps }) {
         />
       </Head>
       <Side />
-      <div  className='md:ml-64'>
-      <Component {...pageProps} />
+      <div className='md:ml-64'>
+        <AuthUserProvider>
+          <Component {...pageProps} />
+        </AuthUserProvider>
       </div>
     </>
   )

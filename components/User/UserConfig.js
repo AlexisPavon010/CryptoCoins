@@ -10,11 +10,17 @@ import useGetUserSession from '../../hooks/useGetUserSession';
 import { app, db } from '../../firebase/client';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useCollection } from 'react-firebase-hooks/firestore';
 
 export default function SettingsForm() {
 
     const [user, setUser] = useState(undefined)
     const [backend, setBacken] = useState(null)
+
+    
+    const [realTimeData, loadig, error] = useCollection(
+        db.collection('user').doc(user?.uid)
+    )
 
     const notify = () => toast.success("Usuario Actualizado Correctamente", {
         position: "top-right",
@@ -26,21 +32,9 @@ export default function SettingsForm() {
         progress: undefined,
     });
 
-    const getData = async () => {
-        const rst = await db.collection('user').doc(user?.uid).get()
-        const rest = rst.data()
-        // const rest = data.map(d => d.data())
-        setBacken(rest)
-        console.log(rst.data())
-    }
-
 
     useEffect(() => {
         app.auth().onAuthStateChanged(user => setUser(user))
-        if (backend == null) {
-            getData()
-        }
-        console.log(user)
     }, [user])
 
     const actualizarDbUser = async () => {
@@ -94,7 +88,7 @@ export default function SettingsForm() {
                                     placeholder="Username"
                                     name='displayName'
                                     onChange={escuchaElInput}
-                                    value={backend?.displayName ? backend?.displayName : ''}
+                                    value={realTimeData?.data()?.displayName ? realTimeData?.data()?.displayName : ''}
                                 />
                             </div>
                             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
@@ -104,7 +98,7 @@ export default function SettingsForm() {
                                     placeholder="Email Address"
                                     name='email'
                                     onChange={escuchaElInput}
-                                    value={backend?.email ? backend?.email : ''}
+                                    value={realTimeData?.data()?.displayName ? realTimeData?.data()?.displayName : ''}
                                 />
                             </div>
                             <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">

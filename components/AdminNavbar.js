@@ -4,13 +4,34 @@ import NavbarInput from '@material-tailwind/react/NavbarInput';
 import Image from '@material-tailwind/react/Image';
 import Dropdown from '@material-tailwind/react/Dropdown';
 import DropdownItem from '@material-tailwind/react/DropdownItem';
-import { useRouter } from 'next/dist/client/router';
-import { app } from '../firebase/client';
+import { useCollection } from 'react-firebase-hooks/firestore';
+import { app, db } from '../firebase/client';
 import useGetUserSession from '../hooks/useGetUserSession';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import useFilterCoins from '../hooks/useFilterCoins';
 
 export default function AdminNavbar({ showSidebar, setShowSidebar }) {
-    const user = useGetUserSession();
+
+    const [search, setSeacrh] = useState('')
+
+    const coins = useFilterCoins(search)
+
+    console.log(coins)
+
+    
+
+    const [user, setUser] = useState(undefined)
+
+    useEffect(() => {
+        app.auth().onAuthStateChanged(user => setUser(user))
+    }, [])
+
+    const [realTimeData, loadig, error] = useCollection(
+        db.collection('user').doc(user?.uid)
+    )
+
+
     const cerrarSesion = () => {
         console.log('salir')
         app.auth().signOut()
@@ -57,7 +78,7 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                     </h4> */}
 
                     <div className="flex">
-                        <NavbarInput placeholder="Search" />
+                        <NavbarInput onChange={(e)=> setSeacrh(e.target.value)} placeholder="Search" />
 
                         <div className="-mr-4 ml-6">
                             <Dropdown
@@ -65,7 +86,7 @@ export default function AdminNavbar({ showSidebar, setShowSidebar }) {
                                 buttonText={
                                     <div className="w-12">
                                         {/* <Icon name="account_circle" size="xl" /> */}
-                                        <Image src={user?.user?.photoURL ? user?.user?.photoURL : "https://bridgemotorsbucket.s3.amazonaws.com/static/images/Home/user_men.png"} rounded />
+                                        <Image className='object-cover' style={{ height: "46px" }}src={realTimeData?.data().photoURL ? realTimeData?.data().photoURL : user?.photoURL || 'https://bridgemotorsbucket.s3.amazonaws.com/static/images/Home/user_men.png'} rounded />
                                     </div>
                                 }
                                 rounded

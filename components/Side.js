@@ -62,7 +62,7 @@ export default function Sidebar() {
                                         className="flex items-center gap-4 text-sm text-white font-light px-4 py-3 rounded-lg"
                                     >
                                         <Icon name="settings_system_daydream" size="2xl" />
-                                        Movimientos
+                                        Operaciones
                                     </a>
                                 </Link>
                             </li>

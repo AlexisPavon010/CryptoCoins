@@ -12,7 +12,7 @@ export default function (req, res) {
         const { data, user } = req.body;
         if (req.body) {
             console.log(data)
-            firestore().collection('movimientos').doc(data?.operaciones).collection('user').doc(user).set({
+            db.collection('movimientos').doc(data?.operaciones).collection('user').doc(user).set({
                 operacion: data?.operaciones,
                 moneda: data?.moneda,
                 criptomonedas: data?.criptomonedas,

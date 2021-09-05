@@ -1,19 +1,13 @@
-import * as admin from 'firebase-admin';
+import * as admin from 'firebase-admin'
+const serviceAccount = require('../firebase-admin-sdk.json')
 
-var serviceAccount = require("../firebase-admin-sdk.json");
+const app = !admin.apps.length 
+? admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+})
+: admin.app();
 
-try {
-
-    admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
-        databaseURL: "https://crypto-coins-b0085-default-rtdb.firebaseio.com"
-    })
-
-} catch (error) {
-    console.log(error)
-
-}
+const firestore = admin.firestore() 
 
 
-
-export const firestore = admin.firestore()
+export {firestore}

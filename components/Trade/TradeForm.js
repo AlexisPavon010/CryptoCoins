@@ -5,31 +5,73 @@ import CardBody from '@material-tailwind/react/CardBody';
 import Button from '@material-tailwind/react/Button';
 import Input from '@material-tailwind/react/Input';
 import GenericsInput from '../Controls/GenericsInput';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { app } from '../../firebase/client';
+
 
 
 export default function TradeForm() {
 
+    const [user, setUser] = useState(null)
+
     const [state, setState] = useState(null)
 
-    const cuandoCambiaElImput = (event) => {
+    useEffect(() => {
+        app.auth().onAuthStateChanged(user => setUser(user))
+    }, [])
+
+    const cuandoCambiaElInput = (event) => {
         event.preventDefault()
         const { name, value } = event.target
         // console.log(name, value)
         setState({ ...state, [name]: value })
 
     }
+    
+    const compraExitosa = () => toast.success("Compra Exitosa", {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
+    const ventaExitosa = () => toast.success("Venta Exitosa", {
+        position: "top-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+    });
 
-    const enviarAlServidor = (e) => {
+    const enviarAlServidor = async (e) => {
         e.preventDefault()
 
-
-        axios.post('/api/operations/buy', {
-            data: state
+        const res = await axios.post('/api/operations/buy', {
+            data: state,
+            user: user?.uid
         })
 
-        // console.log(state)
+        if(res.status === 200) {
+
+            if(res.data.operation === 'Buy') {
+                setState(null)
+                compraExitosa()
+            }
+            if(res.data.operation === 'Shell') {
+                setState(null)
+                ventaExitosa()
+            }
+          
+        }
+
+        console.log(res.data.operation)
 
     }
 
@@ -40,6 +82,7 @@ export default function TradeForm() {
                 <title>Trade | Crypto Coin's</title>
             </Head>
             <Card>
+                 <ToastContainer />
                 <CardHeader color="green" contentPosition="none">
                     <div className="w-full flex items-center justify-between">
                         <h2 className="text-white text-2xl">Trade</h2>
@@ -61,18 +104,17 @@ export default function TradeForm() {
                         <div className="flex flex-wrap mt-10">
                             <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">    
                                 <Input
-                                    id="color"
-                                    list="colors"
+                                    list="operaciones"
                                     type="text"
                                     color="green"
                                     placeholder="Choose Operation"
                                     outline={true}
                                     name='operaciones'
-                                    onChange={cuandoCambiaElImput}
+                                    onChange={cuandoCambiaElInput}
                                 />
-                                <datalist id="colors" >
+                                <datalist id="operaciones" >
                                     <option>Buy</option>
-                                    <option>Shelll</option>
+                                    <option>Shell</option>
                                 </datalist>
                             </div>
                         </div>
@@ -88,7 +130,7 @@ export default function TradeForm() {
                                     outline={true}
                                     entity="criptomonedas"
                                     typeData='criptomonedas'
-                                    onChange={cuandoCambiaElImput}
+                                    onChange={cuandoCambiaElInput}
 
                                 />
                             </div>
@@ -98,7 +140,7 @@ export default function TradeForm() {
                                     color="green"
                                     outline={true}
                                     placeholder="Select a Date"
-                                // onChange={cuandoCambiaElImput}
+                                // onChange={cuandoCambiaElInput}
                                 />
                             </div>
                         </div>
@@ -113,7 +155,7 @@ export default function TradeForm() {
                                     outline={true}
                                     placeholder="Import to Buy/Sell"
                                     name='criptomonedas'
-                                    onChange={cuandoCambiaElImput}
+                                    onChange={cuandoCambiaElInput}
                                 />
                             </div>
                             <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
@@ -123,7 +165,7 @@ export default function TradeForm() {
                                     outline={true}
                                     placeholder="Cryptocurrency Price"
                                     name='cryptocurrency'
-                                    onChange={cuandoCambiaElImput}
+                                    onChange={cuandoCambiaElInput}
                                 />
                             </div>
 
@@ -134,7 +176,7 @@ export default function TradeForm() {
                                     outline={true}
                                     placeholder="Quantity"
                                     name='quantity'
-                                    onChange={cuandoCambiaElImput}
+                                    onChange={cuandoCambiaElInput}
                                 />
                             </div>
 

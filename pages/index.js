@@ -8,8 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-export default function Home(props) {
-  console.log(props)
+export default function Home() {
 
   return (
     <div>
@@ -99,18 +98,19 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(ctx) {
-  const res = await fetch(`https://crypto-coins-virid.vercel.app/api/coins/markets`)
-  const data = await res.json()
+  // const res = await fetch(`https://crypto-coins-virid.vercel.app/api/coins/markets`)
+  // const data = await res.json()
 
-  // console.log(data)
+  // const rst = await firestore.collection('user').doc(ctx.req.cookies.token).get()
+  // const docs = rst.data()
 
-  if (!data) {
-    return {
-      props: {}
-    }
-  }
+  // if (!docs) {
+  //   return {
+  //     props: {}
+  //   }
+  // } 
 
   return {
-    props: { markets: data }, // will be passed to the page component as props
+    props: {}, // will be passed to the page component as props
   }
 }

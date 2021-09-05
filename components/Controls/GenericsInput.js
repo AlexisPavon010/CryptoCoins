@@ -1,13 +1,12 @@
 
-import React from "react";
+import {useState} from "react";
 import Input from "@material-tailwind/react/Input";
 import useFormControls from "../../hooks/useFormControls";
 
 
 export default function GenericsInput(properties) {
 
-
-    const [searchTerm, setSearchTerm] = React.useState("");
+    const [searchTerm, setSearchTerm] = useState("");
     const handleChange = event => {
         setSearchTerm(event.target.value)
         // console.log(event.target.value)
@@ -32,7 +31,7 @@ export default function GenericsInput(properties) {
                 size={properties.size}
                 outline={properties.outline}
                 placeholder={properties.placeholder}
-                value={searchTerm}
+                value={properties.value}
                 name={properties.name}
                 onChange={handleChange}
                 list={properties.entity}

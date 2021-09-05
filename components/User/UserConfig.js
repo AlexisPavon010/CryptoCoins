@@ -14,8 +14,14 @@ import { useCollection } from 'react-firebase-hooks/firestore';
 
 export default function SettingsForm() {
 
+    const estadoInicial = {
+        displayName: '',
+        email: '',
+        apellido: ''
+    }
+
     const [user, setUser] = useState(undefined)
-    const [backend, setBacken] = useState(null)
+    const [backend, setBacken] = useState(estadoInicial)
 
     
     const [realTimeData, loadig, error] = useCollection(
@@ -38,10 +44,10 @@ export default function SettingsForm() {
     }, [user])
 
     const actualizarDbUser = async () => {
-        await db.collection('user').doc(user.uid).update({
-            displayName: backend.displayName,
+        await db.collection(user.uid).doc('userConfig').set({
+            displayName: backend?.displayName,
         }).then(doc => {
-            setBacken(null)
+            setBacken(estadoInicial)
             notify()
             console.log(doc)
         })
@@ -88,7 +94,7 @@ export default function SettingsForm() {
                                     placeholder="Username"
                                     name='displayName'
                                     onChange={escuchaElInput}
-                                    value={realTimeData?.data()?.displayName ? realTimeData?.data()?.displayName : ''}
+                                    value={ backend?.displayName }
                                 />
                             </div>
                             <div className="w-full lg:w-6/12 pl-4 mb-10 font-light">
@@ -98,7 +104,7 @@ export default function SettingsForm() {
                                     placeholder="Email Address"
                                     name='email'
                                     onChange={escuchaElInput}
-                                    value={realTimeData?.data()?.displayName ? realTimeData?.data()?.displayName : ''}
+                                    value={user?.email}
                                 />
                             </div>
                             <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">

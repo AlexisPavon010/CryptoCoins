@@ -15,9 +15,7 @@ export default function CoinsMarkets() {
     const [currency, setCurrency] = useState('usd')
 
     const data = useMarketCoins(page, currency)
-    console.log(data)
 
-    // console.log(state)
     return (
         <Card>
             <CardHeader color="blue" contentPosition="none">

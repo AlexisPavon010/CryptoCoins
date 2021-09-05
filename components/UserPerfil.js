@@ -9,7 +9,6 @@ import Button from '@material-tailwind/react/Button';
 import { useCollection } from 'react-firebase-hooks/firestore';
 import { useEffect, useRef, useState } from 'react';
 import { app, db, storage } from '../firebase/client';
-import nookies from 'nookies'
 
 export default function ProfileCard({ userFb }) {
 
@@ -24,7 +23,7 @@ export default function ProfileCard({ userFb }) {
 
 
     const [realTimeData, loadig, error] = useCollection(
-        db.collection('user').doc(user?.uid)
+        db.collection(userFb.uid).doc('userConfig')
     )
 
     console.log(realTimeData?.data())
@@ -62,7 +61,7 @@ export default function ProfileCard({ userFb }) {
 
     const subirImagenDb = async (archivo) => {
         console.log('ejecuto')
-        db.collection('user').doc(userFb.uid).get()
+        db.collection(userFb.uid).doc('userConfig').get()
             .then(doc => {
                 // console.log(doc)
                 // console.log(archivo)
@@ -70,7 +69,7 @@ export default function ProfileCard({ userFb }) {
                     // var metadata = {
                     //     contentType: archivo.type,
                     // };
-                    const task = storage.ref(`imagenes-subidas/${userFb.uid}`).putString(archivo, 'data_url')
+                    const task = storage.ref(`imagenes-subidas/${user.uid}`).putString(archivo, 'data_url')
                     console.log('Db uploading')
                     // setWork(initialState)
                     setFile(null)
@@ -81,9 +80,9 @@ export default function ProfileCard({ userFb }) {
                         },
                         () => {
                             // notify()
-                            storage.ref(`imagenes-subidas/${userFb.uid}`).getDownloadURL().then(url => {
+                            storage.ref(`imagenes-subidas/${user.uid}`).getDownloadURL().then(url => {
                                 console.log(url)
-                                db.collection('user').doc(userFb.uid).set({
+                                db.collection('user').doc(user.uid).set({
                                     photoURL: url
                                 },
                                     { merge: true })
@@ -111,7 +110,7 @@ export default function ProfileCard({ userFb }) {
             <Card>
                 <div className="flex flex-wrap justify-center">
                     <div  onClick={()=> filePikerRef.current.click()} className="w-48 px-4  -mt-20 cursor-pointer">
-                        <Image style={{height: "160px"}} className='object-cover' src={realTimeData?.data().photoURL ? realTimeData?.data().photoURL : user?.photoURL || 'https://bridgemotorsbucket.s3.amazonaws.com/static/images/Home/user_men.png' } rounded raised/>
+                        <Image style={{height: "160px"}} className='object-cover' src={userFb.photoURL ? userFb.photoURL : user.photoURL  || 'https://bridgemotorsbucket.s3.amazonaws.com/static/images/Home/user_men.png' } rounded raised/>
 
                         <input
                             type='file'
@@ -143,10 +142,10 @@ export default function ProfileCard({ userFb }) {
                 </div>
                 <div className="text-center">
                     <div className='mb-2'>
-                        <h2 color="gray">{realTimeData?.data().displayName ? realTimeData?.data().displayName : user?.email}</h2>
+                        <h2 color="gray">{userFb.displayName ? userFb.displayName : user.displayName}</h2>
                     </div>
                     <div className="mt-0 mb-2 text-gray-700 flex items-center justify-center gap-2">
-                        {realTimeData?.data().email ? realTimeData?.data().email : user?.email}
+                        {userFb.email ? userFb.email : user?.email}
                     </div>
                     <div className="mt-0 mb-2 text-gray-700 flex items-center justify-center gap-2">
                         <Icon name="place" size="xl" />
@@ -188,16 +187,4 @@ export default function ProfileCard({ userFb }) {
             </Card>
         </>
     );
-}
-
-export async function getServerSideProps(ctx) {
-
-    const cookies = nookies.get(ctx)
-
-    console.log(cookies)
-
-
-    return {
-        props: {}
-    }
 }

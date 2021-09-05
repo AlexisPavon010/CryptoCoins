@@ -17,7 +17,18 @@ export default function TradeForm() {
 
     const [user, setUser] = useState(null)
 
-    const [state, setState] = useState(null)
+    const estadoInicial = {    
+            portfolio: "",
+            date: "",
+            operation: "",
+            cryptoBuy: "",
+            cryptoSell: "",
+            import: "",
+            price: "",
+            quantity: ""
+    }
+
+    const [state, setState] = useState(estadoInicial)
 
     useEffect(() => {
         app.auth().onAuthStateChanged(user => setUser(user))
@@ -61,21 +72,19 @@ export default function TradeForm() {
         if (res.status === 200) {
 
             if (res.data.operation === 'Buy') {
-                setState(null)
+                setState(estadoInicial)
                 compraExitosa()
             }
-            if (res.data.operation === 'Shell') {
-                setState(null)
+            if (res.data.operation === 'Sell') {
+                setState(estadoInicial)
                 ventaExitosa()
             }
 
         }
 
-        console.log(res.data.operation)
 
     }
 
-    console.log(state);
 
     return (
         <>
@@ -111,6 +120,7 @@ export default function TradeForm() {
                                     outline={true}
                                     entity="portfolio"
                                     name="portfolio"
+                                    value={state.portfolio}
                                     onChange={cuandoCambiaElInput}
                                 />
                             </div>
@@ -121,6 +131,7 @@ export default function TradeForm() {
                                     outline={true}
                                     placeholder="Select a Date"
                                     name="date"
+                                    value={state.date}
                                     onChange={cuandoCambiaElInput}
                                 />
                             </div>
@@ -137,6 +148,7 @@ export default function TradeForm() {
                                     outline={true}
                                     entity="operations"
                                     name="operation"
+                                    value={state.operation}
                                     onChange={cuandoCambiaElInput}
                                 />
                             </div>
@@ -153,6 +165,7 @@ export default function TradeForm() {
                                     outline={true}
                                     entity="cryptocurrency"
                                     name="cryptoBuy"
+                                    value={state.cryptoBuy}
                                     onChange={cuandoCambiaElInput}
                                 />
                             </div>
@@ -164,6 +177,7 @@ export default function TradeForm() {
                                     outline={true}
                                     entity="cryptocurrency"
                                     name="cryptoSell"
+                                    value={state.cryptoSell}
                                     onChange={cuandoCambiaElInput}
                                 />
                             </div>
@@ -179,6 +193,7 @@ export default function TradeForm() {
                                     outline={true}
                                     placeholder={"Import"+" "+state?.cryptoSell}
                                     name="import"
+                                    value={state.import}
                                     onChange={cuandoCambiaElInput}
                                 />
                             </div>
@@ -189,6 +204,7 @@ export default function TradeForm() {
                                     outline={true}
                                     placeholder="Price"
                                     name='price'
+                                    value={state.price}
                                     onChange={cuandoCambiaElInput}
                                 />
                             </div>
@@ -200,6 +216,7 @@ export default function TradeForm() {
                                     outline={true}
                                     placeholder={"Quantity"+" "+state?.cryptoBuy}
                                     name='quantity'
+                                    value={state.quantity}
                                     onChange={cuandoCambiaElInput}
                                 />
                             </div>

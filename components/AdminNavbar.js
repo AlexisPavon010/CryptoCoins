@@ -9,17 +9,10 @@ import { app, db } from '../firebase/client';
 import useGetUserSession from '../hooks/useGetUserSession';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import useFilterCoins from '../hooks/useFilterCoins';
 
 export default function AdminNavbar({ showSidebar, setShowSidebar }) {
 
     const [search, setSeacrh] = useState('')
-
-    const coins = useFilterCoins(search)
-
-    console.log(coins)
-
-    
 
     const [user, setUser] = useState(undefined)
 

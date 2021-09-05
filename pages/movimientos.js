@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import TableCard from '../components/TableCard';
 import MovimientoTable from '../components/Movimientos/MovimientoTable'
+import { firestore } from '../firebase/admin';
 
 
-export default function Movimientos() {
+export default function Movimientos({tradeFb}) {
 
     return (
         <>
@@ -61,10 +62,30 @@ export default function Movimientos() {
             <div className="px-3 md:px-8 h-auto -mt-24 mb-16">
                 <div className="container mx-auto max-w-full">
                     <div className="grid grid-cols-1 px-4 h-[600px]">
-                        <MovimientoTable />
+                        <MovimientoTable tradeFb={JSON.parse(tradeFb)} />
                     </div>
                 </div>
             </div>
         </>
     );
 }
+export async function getServerSideProps(ctx) {
+
+  
+    const rst = await firestore.collection(ctx.req.cookies.token).doc('movimientos').collection('order').get()
+    const docs = rst.docs.map((doc) => ({...doc.data()}))
+
+
+  
+    if (!docs) {
+      return {
+        props: {}
+      }
+    }
+  
+    return {
+      props: {
+        tradeFb: JSON.stringify(docs)
+      }, // will be passed to the page component as props
+    }
+  }

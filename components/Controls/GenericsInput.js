@@ -3,21 +3,6 @@ import React from "react";
 import Input from "@material-tailwind/react/Input";
 import useFormControls from "../../hooks/useFormControls";
 
-const criptomonedas = [
-    "Bitcoin",
-    "Ethereum",
-    "Cardano",
-    "Dai",
-    "Tether",
-    "Solana",
-    "Ergo"
-];
-
-const operaciones = [
-    "Sell",
-    "Buy"
-];
-
 
 export default function GenericsInput(properties) {
 

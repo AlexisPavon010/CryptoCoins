@@ -30,7 +30,7 @@ export default function TradeForm() {
         setState({ ...state, [name]: value })
 
     }
-    
+
     const compraExitosa = () => toast.success("Compra Exitosa", {
         position: "top-right",
         autoClose: 2500,
@@ -58,23 +58,24 @@ export default function TradeForm() {
             user: user?.uid
         })
 
-        if(res.status === 200) {
+        if (res.status === 200) {
 
-            if(res.data.operation === 'Buy') {
+            if (res.data.operation === 'Buy') {
                 setState(null)
                 compraExitosa()
             }
-            if(res.data.operation === 'Shell') {
+            if (res.data.operation === 'Shell') {
                 setState(null)
                 ventaExitosa()
             }
-          
+
         }
 
         console.log(res.data.operation)
 
     }
 
+    console.log(state);
 
     return (
         <>
@@ -82,7 +83,7 @@ export default function TradeForm() {
                 <title>Trade | Crypto Coin's</title>
             </Head>
             <Card>
-                 <ToastContainer />
+                <ToastContainer />
                 <CardHeader color="green" contentPosition="none">
                     <div className="w-full flex items-center justify-between">
                         <h2 className="text-white text-2xl">Trade</h2>
@@ -99,23 +100,45 @@ export default function TradeForm() {
                 <CardBody>
                     <form>
                         <h6 className="text-green-500 text-sm mt-3 mb-6 font-light">
-                            Choose Operation
+                            Portfolio Information
                         </h6>
                         <div className="flex flex-wrap mt-10">
-                            <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">    
+                            <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                                <GenericsInput
+                                    type="text"
+                                    color="green"
+                                    placeholder="Choose Portfolio"
+                                    outline={true}
+                                    entity="portfolio"
+                                    name="portfolio"
+                                    onChange={cuandoCambiaElInput}
+                                />
+                            </div>
+                            <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
                                 <Input
-                                    list="operaciones"
+                                    type="text"
+                                    color="green"
+                                    outline={true}
+                                    placeholder="Select a Date"
+                                    name="date"
+                                    onChange={cuandoCambiaElInput}
+                                />
+                            </div>
+                        </div>
+                        <h6 className="text-green-500 text-sm mt-3 mb-6 font-light">
+                            Operation
+                        </h6>
+                        <div className="flex flex-wrap mt-10">
+                            <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
+                            <GenericsInput
                                     type="text"
                                     color="green"
                                     placeholder="Choose Operation"
                                     outline={true}
-                                    name='operaciones'
+                                    entity="operations"
+                                    name="operation"
                                     onChange={cuandoCambiaElInput}
                                 />
-                                <datalist id="operaciones" >
-                                    <option>Buy</option>
-                                    <option>Shell</option>
-                                </datalist>
                             </div>
                         </div>
                         <h6 className="text-green-500 text-sm mt-3 mb-6 font-light">
@@ -126,21 +149,22 @@ export default function TradeForm() {
                                 <GenericsInput
                                     type="text"
                                     color="green"
-                                    placeholder="Choose Cryptocurrency"
+                                    placeholder="Choose Cryptocurrency Buy"
                                     outline={true}
-                                    entity="criptomonedas"
-                                    typeData='criptomonedas'
+                                    entity="cryptocurrency"
+                                    name="cryptoBuy"
                                     onChange={cuandoCambiaElInput}
-
                                 />
                             </div>
                             <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                                <Input
+                                <GenericsInput
                                     type="text"
                                     color="green"
+                                    placeholder="Choose Cryptocurrency Sell"
                                     outline={true}
-                                    placeholder="Select a Date"
-                                // onChange={cuandoCambiaElInput}
+                                    entity="cryptocurrency"
+                                    name="cryptoSell"
+                                    onChange={cuandoCambiaElInput}
                                 />
                             </div>
                         </div>
@@ -153,8 +177,8 @@ export default function TradeForm() {
                                     type="number"
                                     color="green"
                                     outline={true}
-                                    placeholder="Import to Buy/Sell"
-                                    name='criptomonedas'
+                                    placeholder={"Import"+" "+state?.cryptoSell}
+                                    name="import"
                                     onChange={cuandoCambiaElInput}
                                 />
                             </div>
@@ -163,8 +187,8 @@ export default function TradeForm() {
                                     type="number"
                                     color="green"
                                     outline={true}
-                                    placeholder="Cryptocurrency Price"
-                                    name='cryptocurrency'
+                                    placeholder="Price"
+                                    name='price'
                                     onChange={cuandoCambiaElInput}
                                 />
                             </div>
@@ -174,7 +198,7 @@ export default function TradeForm() {
                                     type="number"
                                     color="green"
                                     outline={true}
-                                    placeholder="Quantity"
+                                    placeholder={"Quantity"+" "+state?.cryptoBuy}
                                     name='quantity'
                                     onChange={cuandoCambiaElInput}
                                 />

@@ -33,7 +33,7 @@ export default function GenericsInput(properties) {
                 outline={properties.outline}
                 placeholder={properties.placeholder}
                 value={searchTerm}
-                name='moneda'
+                name={properties.name}
                 onChange={handleChange}
                 list={properties.entity}
             />

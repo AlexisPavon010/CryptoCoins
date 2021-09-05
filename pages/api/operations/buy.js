@@ -11,17 +11,20 @@ export default function (req, res) {
         // console.log(req.body)
         const { data, user } = req.body;
         if (req.body) {
-            console.log(data)
-            db.collection('movimientos').doc(data?.operaciones).collection('user').doc(user).set({
-                operacion: data?.operaciones,
-                moneda: data?.moneda,
-                criptomonedas: data?.criptomonedas,
-                cryptocurrency: data?.cryptocurrency,
+
+            db.collection(user).doc("movimientos").collection("order").doc().set({
+                portfolio: data?.portfolio,
+                date: data?.date,
+                operation: data?.operation,
+                cryptoBuy: data?.cryptoBuy,
+                cryptoSell: data?.cryptoSell,
+                import: data?.import,
+                price: data?.price,
                 quantity: data?.quantity,
-                date: new Date()
+                auditDate: new Date()
             })
         }
-        res.status(200).send({ operation: data?.operaciones })
+        res.status(200).send({ operation: data?.operation })
 
     }
     if (req.method === 'PUT') {

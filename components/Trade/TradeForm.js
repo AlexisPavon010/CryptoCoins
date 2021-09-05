@@ -5,9 +5,35 @@ import CardBody from '@material-tailwind/react/CardBody';
 import Button from '@material-tailwind/react/Button';
 import Input from '@material-tailwind/react/Input';
 import GenericsInput from '../Controls/GenericsInput';
+import axios from 'axios';
+import { useState } from 'react';
 
 
 export default function TradeForm() {
+
+    const [state, setState] = useState(null)
+
+    const cuandoCambiaElImput = (event) => {
+        event.preventDefault()
+        const { name, value } = event.target
+        // console.log(name, value)
+        setState({ ...state, [name]: value })
+
+    }
+
+    const enviarAlServidor = (e)=> {
+        e.preventDefault()
+
+
+        axios.post('/api/operations/buy', {
+            data: state
+        })
+
+        // console.log(state)
+        
+    }
+
+
     return (
         <>
             <Head>
@@ -40,6 +66,8 @@ export default function TradeForm() {
                                     placeholder="Choose Operation"
                                     outline={true}
                                     entity="operaciones"
+                                    typeData='operaciones'
+                                    onChange={cuandoCambiaElImput}
 
                                 />
                             </div>
@@ -55,6 +83,8 @@ export default function TradeForm() {
                                     placeholder="Choose Cryptocurrency"
                                     outline={true}
                                     entity="criptomonedas"
+                                    typeData='criptomonedas'
+                                    onChange={cuandoCambiaElImput}
 
                                 />
                             </div>
@@ -64,6 +94,7 @@ export default function TradeForm() {
                                     color="green"
                                     outline={true}
                                     placeholder="Select a Date"
+                                    // onChange={cuandoCambiaElImput}
                                 />
                             </div>
                         </div>
@@ -77,6 +108,8 @@ export default function TradeForm() {
                                     color="green"
                                     outline={true}
                                     placeholder="Import to Buy/Sell"
+                                    name='criptomonedas'
+                                    onChange={cuandoCambiaElImput}
                                 />
                             </div>
                             <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
@@ -85,6 +118,8 @@ export default function TradeForm() {
                                     color="green"
                                     outline={true}
                                     placeholder="Cryptocurrency Price"
+                                    name='cryptocurrency'
+                                    onChange={cuandoCambiaElImput}
                                 />
                             </div>
 
@@ -94,6 +129,8 @@ export default function TradeForm() {
                                     color="green"
                                     outline={true}
                                     placeholder="Quantity"
+                                    name='quantity'
+                                    onChange={cuandoCambiaElImput}
                                 />
                             </div>
 
@@ -101,6 +138,7 @@ export default function TradeForm() {
 
                         <div className="w-full flex items-center justify-between">
                             <Button
+                                onClick={enviarAlServidor}
                                 color="lightBlue"
                                 buttonType="filled"
                                 size="lg"
@@ -109,7 +147,7 @@ export default function TradeForm() {
                                 iconOnly={false}
                                 ripple="light"
                             >
-                                Save
+                                Enviar
                             </Button>
                         </div>
                     </form>

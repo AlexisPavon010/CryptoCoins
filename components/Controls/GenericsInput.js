@@ -21,10 +21,13 @@ const operaciones = [
 
 export default function GenericsInput(properties) {
 
+
     const [searchTerm, setSearchTerm] = React.useState("");
     const handleChange = event => {
-        setSearchTerm(event.target.value);
-
+        setSearchTerm(event.target.value)
+        // console.log(event.target.value)
+        properties.onChange(event)
+    
     };
 
     const variable = useFormControls(properties.entity);
@@ -34,7 +37,8 @@ export default function GenericsInput(properties) {
         : variable.results.filter(variable =>
             variable.results.toLowerCase().includes(searchTerm.toLocaleLowerCase())
         );
-            
+        console.log(properties)    
+
     return (
         <div>
             <Input
@@ -44,6 +48,7 @@ export default function GenericsInput(properties) {
                 outline={properties.outline}
                 placeholder={properties.placeholder}
                 value={searchTerm}
+                name={searchResults}
                 onChange={handleChange}
                 list={properties.entity}
             />

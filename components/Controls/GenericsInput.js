@@ -37,7 +37,7 @@ export default function GenericsInput(properties) {
         : variable.results.filter(variable =>
             variable.results.toLowerCase().includes(searchTerm.toLocaleLowerCase())
         );
-        console.log(properties)    
+        // console.log(properties)    
 
     return (
         <div>
@@ -48,7 +48,7 @@ export default function GenericsInput(properties) {
                 outline={properties.outline}
                 placeholder={properties.placeholder}
                 value={searchTerm}
-                name={searchResults}
+                name='Moneda'
                 onChange={handleChange}
                 list={properties.entity}
             />

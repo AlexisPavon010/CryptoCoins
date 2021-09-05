@@ -21,7 +21,7 @@ export default function TradeForm() {
 
     }
 
-    const enviarAlServidor = (e)=> {
+    const enviarAlServidor = (e) => {
         e.preventDefault()
 
 
@@ -30,7 +30,7 @@ export default function TradeForm() {
         })
 
         // console.log(state)
-        
+
     }
 
 
@@ -59,17 +59,21 @@ export default function TradeForm() {
                             Choose Operation
                         </h6>
                         <div className="flex flex-wrap mt-10">
-                            <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">
-                                <GenericsInput
+                            <div className="w-full lg:w-6/12 pr-4 mb-10 font-light">    
+                                <Input
+                                    id="color"
+                                    list="colors"
                                     type="text"
                                     color="green"
                                     placeholder="Choose Operation"
                                     outline={true}
-                                    entity="operaciones"
-                                    typeData='operaciones'
+                                    name='operaciones'
                                     onChange={cuandoCambiaElImput}
-
                                 />
+                                <datalist id="colors" >
+                                    <option>Buy</option>
+                                    <option>Shelll</option>
+                                </datalist>
                             </div>
                         </div>
                         <h6 className="text-green-500 text-sm mt-3 mb-6 font-light">
@@ -94,7 +98,7 @@ export default function TradeForm() {
                                     color="green"
                                     outline={true}
                                     placeholder="Select a Date"
-                                    // onChange={cuandoCambiaElImput}
+                                // onChange={cuandoCambiaElImput}
                                 />
                             </div>
                         </div>
